@@ -19,8 +19,8 @@ ll = 0
 llFresh = 0
 llStale = 0
 db = {}
-erps = {"unifCont":0, "studentT":1, "poisson":2, "normal":3, "invGamma":4}
-dists = [ss.uniform, ss.t, ss.poisson, ss.norm, ss.invgamma]
+erps = {"unifCont":0, "studentT":1, "poisson":2, "normal":3, "invGamma":4, "beta":5}
+dists = [ss.uniform, ss.t, ss.poisson, ss.norm, ss.invgamma, ss.beta]
 observ = set()
 condition = set()
 cols = ['b','r','k','m','c','g']
@@ -44,6 +44,62 @@ def normal(mean, stDev, cond = None, obs=False, name = None):
 def invGamma(shape, scale, cond = None, obs=False, name = None):
   initERP(name, obs)
   return getERP(name, cond, erps["invGamma"], (shape, 0, scale))
+
+def beta(a, b, cond = None, obs=False, name = None):
+  initERP(name, obs)
+  return getERP(name, cond, erps["beta"], (a, b))
+
+def stocPrim(distName, params, cond = None, obs=False, name = None):
+  if distName not in erps:
+    erps[distName] = len(erps)
+    dists.append(getattr(ss, "norm"))
+  initERP(name, obs)
+  return getERP(name, cond, erps[distName], params)
+
+def initERP(name, obs):
+  assert(name)
+  global observ
+  global curNames
+  curNames.add(name)
+  if obs:
+    observ.add(name)
+
+def getERP(n, c, tp, ps):
+  global ll
+  global llFresh
+  global db
+  global condition
+  otp, ox, ol, ops = db.get(n, (None,None,None,None))
+  if tp == otp:
+    if ps == ops:
+      ll += ol
+      return ox
+    else:
+      try:
+        l = dists[tp].logpdf(ox, *ps)
+      except:
+        l = dists[tp].logpmf(ox, *ps)
+
+      db[n] = (tp, ox, l, ps)
+      ll += l
+      return ox
+  else:
+    if c:
+      x = c
+      condition.add(n)
+    else:
+      assert (not n in condition)
+      x = dists[tp].rvs(*ps)
+    try:
+      l = dists[tp].logpdf(x, *ps)
+    except:
+      l = dists[tp].logpmf(x, *ps)
+
+    db[n] = (tp, x, l, ps)
+    ll += l
+    if not c:
+      llFresh += l
+    return x
 
 debugOn = False
 def debugPrint(override, *mess):
@@ -106,7 +162,7 @@ class RewriteModel(ast.NodeTransformer):
 
   def visit_Call(self, node):
     callType = dict(ast.iter_fields(dict(ast.iter_fields(node))['func'])).get('attr',None)
-    if callType in erps.keys():
+    if callType in erps.keys() or callType == "stocPrim":
       dict(ast.iter_fields(node))['keywords'].append(ast.keyword(arg='name', value=ast.BinOp(left=ast.Str(s=self.funcName + "-" + str(node.lineno) + "-"), op=ast.Add(), right=ast.Call(func=ast.Name(id='str', ctx=ast.Load()), args=[ast.Name(id=self.tempName, ctx=ast.Load())], keywords=[], starargs=None, kwargs=None))))
       ast.fix_missing_locations(node)
       #print map(ast.dump, dict(ast.iter_fields(node))['keywords'])
@@ -567,42 +623,6 @@ def getExplicitName(funcName, lineNo, loopInd):
   else:
     raise Exception("Unrecognized nameGenMet in genExplicitName: " + str(nameGenMet))
 
-def getERP(n, c, tp, ps):
-  global ll
-  global llFresh
-  global db
-  global condition
-  otp, ox, ol, ops = db.get(n, (None,None,None,None))
-  if tp == otp:
-    if ps == ops:
-      ll += ol
-      return ox
-    else:
-      try:
-        l = dists[tp].logpdf(ox, *ps)
-      except:
-        l = dists[tp].logpmf(ox, *ps)
-
-      db[n] = (tp, ox, l, ps)
-      ll += l
-      return ox
-  else:
-    if c:
-      x = c
-      condition.add(n)
-    else:
-      assert (not n in condition)
-      x = dists[tp].rvs(*ps)
-    try:
-      l = dists[tp].logpdf(x, *ps)
-    except:
-      l = dists[tp].logpmf(x, *ps)
-
-    db[n] = (tp, x, l, ps)
-    ll += l
-    if not c:
-      llFresh += l
-return x
 """
 def getERP1(n, c, tp, ps):
   global ll
@@ -631,14 +651,6 @@ def getERP1(n, c, tp, ps):
   return x
 """
 
-def initERP(name, obs):
-  assert(name)
-  global observ
-  global curNames
-  curNames.add(name)
-  if obs:
-    observ.add(name)
-
 def plotTestDist(b):
   samples = []
   for i in range(100000):
@@ -656,14 +668,17 @@ def plotTestDist(b):
 
 def readSamps(fn, start=0):
   with open(fn, 'r') as f:
-    data = f.read().strip().split('\n')
-    if len(data) == 1: # list format
-      samps = map(float, data[0][1:-1].split(','))[start:]
-    else: # rows of (count, sample) format
-      samps = []
-      for line in data:
-        count, samp = map(float, line.strip().split())
-        samps.append(samp)
+    try:
+      samps = getData(cPickle.load(f))
+    except:
+      data = f.read().strip().split('\n')
+      if len(data) == 1: # list format
+        samps = map(float, data[0][1:-1].split(','))[start:]
+      else: # rows of (count, sample) format
+        samps = []
+        for line in data:
+          count, samp = map(float, line.strip().split())
+          samps.append(samp)
   return samps
 
 def plotSampDist(fn, name = "Metropolis", start=0, cutOff = float("inf")):
@@ -674,7 +689,7 @@ def plotSampDist(fn, name = "Metropolis", start=0, cutOff = float("inf")):
   plt.title(name + " ran for 10m - " + str(len(samps)) + " samples", size=30)# - mean: " + str(np.mean(samps))[:5] + ", stDev: " + str(np.std(samps))[:5])
   plt.show()
 
-def plotCumSampDist(fn, plot=True, show=True):
+def plotCumSampDist(fn, plot=True, show=True, xlim = None):
   samps = readSamps(fn)
   hSamps, ds =  np.histogram(samps, 1000)
   cSamps = []
@@ -688,8 +703,9 @@ def plotCumSampDist(fn, plot=True, show=True):
   for d in range(len(ds)-1):
     locs.append((ds[d] + ds[d+1]) / 2.0)
 
-  cSamps = [0] + cSamps + [1]
-  locs = [2] + locs + [40]
+  if xlim:
+    cSamps = [0] + cSamps + [1]
+    locs = [xlim[0]] + locs + [xlim[1]]
 
   if plot:
     plt.plot(locs, cSamps)
@@ -735,9 +751,17 @@ def calcKSTest(pfn, fns, names = None):
     fn = fns[i]
     diffs[fn] = []
     xs, ys =  plotCumSampDist(fn, plot=False)
+    minX = min(xs)
+    maxX = max(xs)
     f = interpolate.interp1d(xs,ys)
     for x,y in post:
-      diffs[fn].append(abs(f(x) - y))
+      if x <= minX:
+        val = abs(y)
+      elif x >= maxX:
+        val = abs(1-y)
+      else:
+        val = abs(f(x) - y)
+      diffs[fn].append(val)
     diffs[fn] = sorted(diffs[fn], reverse=True)
 
     p, = plt.plot(diffs[fn], cols[i], linewidth=3)
@@ -759,6 +783,8 @@ def calcKSRun(postFun, run, aggFreq, burnIn):
   xs = []
   ys = []
   curAgg = 0
+  if isinstance(run, list):
+    run = dict([(i+1, run[i]) for i in range(len(run))])
   for k, samp in sorted(run.items()):
     if k < burnIn:
       continue
@@ -780,7 +806,7 @@ def calcKSRun(postFun, run, aggFreq, burnIn):
   ys.append(calcKSDiff(postFun, samps))
   return xs, ys
 
-def calcKSTests(fns, pfn, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=None, alpha=0.25, single=False):
+def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=None, alpha=0.25, single=False):
   postFun = interpolate.interp1d(*plotCumPost(pfn, plot=False, zipRez=False))
   ps = []
   ns = []
@@ -790,8 +816,9 @@ def calcKSTests(fns, pfn, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=N
     p, = plt.plot([0],[0], cols[i])
     ps.append(p)
     ns.append(fn.split('/')[1])
-    with open(fn, 'r') as f:
-      runs = cPickle.load(f)
+    runs = readSamps(fn)
+    if single:
+      runs = [runs]
     for r in range(len(runs)):
       print fn, r
       xs, ys = calcKSRun(postFun, runs[r], aggFreq, burnIn)
@@ -1084,10 +1111,13 @@ def getData(samps, name = None):
         data = map(lambda (k,v): v, sorted(samps.items()))
   return data
 
-def plotSamples(samps, name = None, filt = lambda x:True, xlabel=""):
+def plotSamples(samps, name = None, filt = lambda x:True, xlabel="", title="", xlim=None):
   plt.hist(filter(filt, getData(samps, name)), 100)
   plt.ylabel("Number samples")
   plt.xlabel(xlabel)
+  plt.title(title)
+  if xlim:
+    plt.xlim(xlim)
   plt.show()
 
 def saveRun(run, path):
