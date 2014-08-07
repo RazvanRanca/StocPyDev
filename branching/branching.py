@@ -1,9 +1,10 @@
-import stocPy
+import sys
+sys.path.append("/home/haggis/Desktop/StocPyDev")
+import stocPyDev as stocPy
 from matplotlib import pyplot as plt
 import cPickle
 import branchingVenture as bv
 import numpy as np
-import stocPy
 import math
 import scipy.stats as ss
 

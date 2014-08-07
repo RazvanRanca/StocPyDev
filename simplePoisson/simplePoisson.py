@@ -1,4 +1,6 @@
-import stocPy
+import sys
+sys.path.append("/home/haggis/Desktop/StocPyDev")
+import stocPyDev as stocPy
 
 noLetters = [7,2,3,1,4,0,0] # number of letters received each day for a week
 

@@ -1,4 +1,6 @@
-import stocPy
+import sys
+sys.path.append("/home/haggis/Desktop/StocPyDev")
+import stocPyDev as stocPy
 import time
 import scipy.stats as ss
 import math

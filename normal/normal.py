@@ -1,11 +1,10 @@
 import sys
 sys.path.append("/home/haggis/Desktop/StocPyDev/")
-import stocPy
+import stocPyDev as stocPy
 import math
 import scipy.stats as ss
 import numpy as np
 from matplotlib import pyplot as plt
-import stocPy
 from venture.shortcuts import *
 import cPickle
 
@@ -217,13 +216,47 @@ def normal8Dec15():
   for datum in normalData:
     stocPy.normal(m, 1, datum)
 
+def normal8DecU20():
+  n = stocPy.stocPrim("randint", (0, 21))
+  var = 1.0
+  ms = []
+  for i in range(n):
+    ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  m = 10000 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
+  for datum in normalData:
+    stocPy.normal(m, 1, datum)
+
+def normal9Dec5():
+  n = 5
+  var = 1.0
+  ms = []
+  for i in range(n):
+    ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  m = sum(ms)
+
+def normal9Dec10():
+  n = 10
+  var = 1.0
+  ms = []
+  for i in range(n):
+    ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  m = sum(ms)
+
+def normal9Dec15():
+  n = 15
+  var = 1.0
+  ms = []
+  for i in range(n):
+    ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  m = sum(ms)
 
 def normal1():
   m = stocPy.normal(0, 1, obs=True)
-  cond = None
-  if init:
-    cond = obs
-  stocPy.normal(m, 1, cond)
+  stocPy.normal(m, 1, obs)
 
 def normal2():
   m = stocPy.normal(0, 1, obs=True)
@@ -284,6 +317,9 @@ def normal8():
   m = stocPy.unifCont(0, 10000, obs=True)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
+
+def normal9(): #prior = post
+  m = stocPy.normal(0, 1, obs=True)
 
 def normalVenture(model, v, sample, burn = 0, lag = 1):
   if model == 1:
@@ -371,6 +407,8 @@ def getLikAprox(model, m, data = None):
     for datum in data:
       pdm += ss.norm.logpdf(datum, m, 1)
     return pdm + pm
+  elif model == 9: # this is just a gaussian(0,1)
+    return ss.norm.pdf(m, 0, 1)
   else:
     raise Exception("Unknown model type: " + str(model))
 
@@ -398,7 +436,7 @@ def getPost(model, start, end, inc, aprox=True, show = True, fn=None, rfn = None
       else:
         ys.append(getLikExact(model, m))
 
-    if aprox and model < 5:
+    if aprox and (model < 5 or model == 9):
       ys = stocPy.norm(ys)
     else:
       print ys
@@ -417,7 +455,13 @@ def getPost(model, start, end, inc, aprox=True, show = True, fn=None, rfn = None
     with open(fn,'w') as f:
       cPickle.dump((xs,ys),f)
 
-def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=False, name=None):
+def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=False, name=None, time=None):
+
+  if time:
+    length = time
+    stocPyFunc = stocPy.getTimedSamples
+  else:
+    stocPyFunc = stocPy.getSamplesByLL
 
   if model == normal1:
     name = 'normal1-6-0'
@@ -447,13 +491,13 @@ def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=F
   for i in range(noRuns):
     print "Run", i
     if name:
-      runs.append(stocPy.getSamplesByLL(model, length, alg=alg, thresh=thresh)[name])
+      runs.append(stocPyFunc(model, length, alg=alg, thresh=thresh)[name])
     else:
       if agg:
-        samples = stocPy.aggDecomp(stocPy.getSamplesByLL(model, length, alg=alg, thresh=thresh))
+        samples = stocPy.aggDecomp(stocPyFunc(model, length, alg=alg, thresh=thresh))
         runs.append(samples)
       else:
-        samples = stocPy.getSamplesByLL(model, length, alg=alg, thresh=thresh)
+        samples = stocPyFunc(model, length, alg=alg, thresh=thresh)
         assert(len(samples.keys()) == 1)
         runs.append(samples[samples.keys()[0]])
 
@@ -493,24 +537,303 @@ def runKsTest(mi):
   #stocPy.calcKSTest(expDir + "normal" + mi + "Post", paths, names = titles)
   stocPy.calcKSTests(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(50000,10),10), burnIn=1000, single=True, alpha=1, names=titles, ylim=[0.0225, 1.5], title="Single Run performance on NormalMean" + mi +"-prior = Unif(0,10000)")
 
-def runKsRuns(mi):
+def runKsRuns(mi, term = "MetRuns"):
   mi = str(mi)
+
   expDir = stocPy.getCurDir(__file__) + "/"
-  paths = ["normal" + mi + "MetRuns", "normal" + mi + "Dec5MetRuns", "normal" + mi + "Dec10MetRuns", "normal" + mi + "Dec15MetRuns"]
+
+  paths = ["normal" + mi + term, "normal" + mi + "Dec5" + term, "normal" + mi + "Dec10" + term, "normal" + mi + "Dec15" + term]
   titles = ["Metropolis", "Metropolis Dec5", "Metropolis Dec10", "Metropolis Dec15"]
   paths = [expDir + path for path in paths]
 
   #stocPy.calcKSTest(expDir + "normal" + mi + "Post", paths, names = titles)
   #stocPy.calcKSTests(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(2000,10),10), burnIn=100, postXlim = [0,10000], names=titles)
-  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(2000,10),10), burnIn=100, postXlim = [0,10000], names=titles, modelName = "NormalMean8")
+  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(100000,10),10), burnIn=1000, names=titles, modelName = "NormalMean" + mi)
 
-if __name__ == "__main__": #9northerniighT
+def movementFromMode((priorMean, priorStd), (postMean, postStd), curSamp, iters):
+  move = []
+  for prop in ss.norm.rvs(loc=priorMean, scale=priorStd, size=iters):
+    move.append((prop, min(1, ss.norm.pdf(prop, loc=postMean, scale=postStd) / ss.norm.pdf(curSamp, loc=postMean, scale=postStd))))
+  return move
+
+def testMovement(ds, dFunc, aFunc, iters, title, priorStd = 1.0): # test if movement prob (transformed by dFunc) follows aFunc
+  probs = map(lambda p: dFunc(movementFromMode((0, priorStd), (0, p), 0, iters), p), [priorStd/d for d in ds])
+  rProbs = []
+  rDs = np.logspace(math.log(ds[0],10),math.log(ds[-1],10), 500)
+  for i in rDs:
+    rProbs.append(aFunc(i))
+  plt.plot(rDs,rProbs, 'r')
+  plt.plot(ds, probs, 'bD')
+  plt.xscale("log")
+  plt.xlabel("priorStd / postStd")
+  plt.title(title)
+  plt.show()
+
+def testMovementProb(ds, iters, title=""): # test if movement prob follows 1/sqrt(d^2 + 1)
+  testMovement(ds, lambda xs, p: np.mean(map(lambda x : x[1], xs)), lambda d: 1/math.sqrt(d**2 + 1), iters, title=title)
+
+def testMovementExpectation(ds, iters, priorStd = 1.0, title=""): # test if E(movement) follows (sqrt(2/pi) * d) / (d^2 + 1)
+  testMovement(ds, lambda xs, p: np.mean(map(lambda x : (abs(x[0])/p)*x[1], xs)), lambda d: (math.sqrt(2/math.pi) * d) / (d**2 + 1), iters, title=title, priorStd = priorStd)
+
+def testMovementDiff(rs, priorStd, postStd, iters, title=""): # test if perf. diff given partition diff r is (r^2 + 1)/2r
+  rDiffs = []
+  diffs = []
+  d = float(priorStd) / postStd
+  for r in rs:
+    p2 = d/r
+    m1 = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/d), (0, postStd), 0, iters)])
+    m2 = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/p2), (0, postStd), 0, iters)])
+    print r, p2, m1, m2, m1/m2
+    diffs.append(m1/m2)    
+
+  nRs = np.logspace(math.log(rs[0],10),math.log(rs[-1],10), 500)
+  for r in nRs:
+    rDiffs.append((r**2 + 1) / (2*r))
+
+  diffs.reverse() # otherwise it would be part2 / optimalPart
+  plt.plot(nRs, rDiffs, 'r') 
+  plt.plot(rs, diffs, 'bD')
+  plt.xscale("log")
+  plt.xlabel("optimalPartition / partition2")
+  plt.ylabel("optimalMovement / movement2")
+  plt.title(title)
+  #plt.ylim([0,100])
+  plt.show()
+
+def testMovementDiffExp(priorStd, postStd, iters, title=""): # test if perf. diff given exp partition diff c is (2^(2c) + 1) / (2^(c+1))
+  nRs = np.logspace(-3,3, 500)
+  rDiffs = []  
+  for r in nRs:
+    rDiffs.append((r**2 + 1) / (2*r))
+
+  eDiffs = []
+  eCs = range(-9,10)
+  eRs = []
+  for c in eCs:
+    eDiffs.append((2**(2.0*c) + 1.0) / (2**(c+1.0)))
+    eRs.append(2.0**c)
+
+  diffs = []
+  d = float(priorStd) / postStd
+  for c in eCs:
+    p2 = d/(2.0**c)
+    m1 = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/d), (0, postStd), 0, iters)])
+    m2 = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/p2), (0, postStd), 0, iters)])
+    print r, p2, m1, m2, m1/m2
+    diffs.append(m1/m2)  
+
+  diffs.reverse()
+  print zip(eRs, eDiffs)
+  plt.plot(nRs, rDiffs, 'r') 
+  plt.plot(eRs, eDiffs, 'bD')
+  plt.plot(eRs, diffs, 'g^')
+  plt.xscale("log")
+  plt.xlabel("optimalPartition / partition2")
+  plt.ylabel("optimalMovement / movement2")
+  plt.title(title)
+  #plt.ylim([0,100])
+  plt.show()
+
+def testMovementExpConv(priorStd, postStd, iters, title="", norm=False): # test convergence of movement perf as # partitions around optimum increase
+  parts = [0]
+  mov = [0]
+  for p in range(11):
+    parts.append(parts[-1] + 1)
+    mov.append(mov[-1] + (2**(p+1.0)/(2**(2.0*p) + 1)))
+    if p > 0:
+      parts.append(parts[-1] + 1)
+      mov.append(mov[-1] + (2**(p+1.0)/(2**(2.0*p) + 1)))
+
+  limit = 2*math.pi / math.log(4)
+  if norm:
+    mov = map(lambda x: x/limit, mov)
+    limit = 1
+  plt.plot([0, parts[-1]+1], [limit, limit], 'r', linewidth=3)
+  plt.plot(parts, mov, 'bD')
+  plt.xlim([0, parts[-1]+1])
+  plt.xlabel("Partitions")
+  if norm:
+    plt.ylabel("Prop Maximal Movement")
+    plt.title("Normalized convergence of movement as number of paritions increases")
+  else:
+    plt.ylabel("Total Movement / Optimal Parition Movement")
+    plt.title("Convergence of movement as number of paritions increases")
+  print zip(parts, mov)
+  plt.show()
+
+def verifyMovementExpDepth(priorStd, postStd, maxDepth, iters, title=""): # test performance of depth given d follows formula
+  diffs = []
+  rDiffs = []
+  mds = []
+  for depth in range(maxDepth + 1):
+    diffs.append(0)
+    rDiffs.append(0)
+    mds.append(depth)
+    for d in range(1, depth + 1):
+      em = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/(2.0**d)), (0, postStd), 0, iters)])
+      print d, "/", depth, "-", em
+      diffs[-1] += em
+      dp = (priorStd/postStd) / (2.0**d)
+      rDiffs[-1] += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1) 
+    dp = (priorStd/postStd) / 2.0**depth
+    rDiffs[-1] += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1)
+    rDiffs[-1] /= (depth + 1.0)
+    diffs[-1] += np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/(2.0**depth)), (0, postStd), 0, iters)])
+    diffs[-1] /= (depth + 1.0)
+
+  plt.plot(mds, diffs, 'bD')
+  plt.plot(mds, rDiffs, 'rx', markersize=12)
+  plt.xlabel("Depth")
+  plt.ylabel("Expected Movement / postStd")
+  plt.title("Performance as number of partitions increases for priorStd/postStd=10")
+  plt.show()
+
+def getMixExpMovement(d, depths, weights = None):
+  if not weights:
+    weights = [1.0 for i in range(len(depths))]
+  weights = stocPy.norm(weights)
+  
+  mix = 0
+  for i in range(len(depths)):
+    mix += weights[i] * getExpMovement(d, depths[i])
+
+  return mix
+
+def getExpMovement(d, depth):
+  em = 0
+  for p in range(1, depth + 1):
+    dp = d / (2.0**p)
+    em += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1) 
+  dp = d / 2.0**depth
+  em += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1)
+  em /= (depth + 1.0)
+  return em
+
+def testMovementExpDepth(priorStd, postStd, maxDepth, title=""): # test performance of depth given d
+  rDiffs = []
+  mds = []
+  for depth in range(maxDepth + 1):
+    mds.append(depth)
+    rDiffs.append(getExpMovement(priorStd/postStd, depth))
+
+  print zip(mds, rDiffs)
+  plt.plot(mds, rDiffs, 'bD')
+  plt.xlabel("Depth")
+  plt.ylabel("Expected Movement / postStd")
+  plt.title("Performance as number of partitions increases for priorStd/postStd=10")
+  plt.show()
+
+"""
+def testOptimalDepthNoTerm(priorStd, postStd): # get Optimal depth for d, verify against testMovementExpDepth
+  depth = 1
+  d = priorStd / postStd
+  sumVal = 0
+  while True:
+    val = 2.0**depth / (d**2.0 + 2**(2.0 * depth))
+    print depth, val, sumVal
+    if sumVal == 0 or val > (sumVal/(depth-1)):
+      sumVal += val
+      depth +=1
+    else:
+      break
+  print depth -1, math.log(d,2)
+  propStop = max(1, math.ceil(math.log(d, 2))) + 1
+  # if depth != propStop and depth != propStop-1:
+  #   print d, depth, propStop 
+"""
+def getOptimalDepth(d, dump=False): # get Optimal depth for d, verify against testMovementExpDepth
+  depth = 1
+  sumVal = 0
+  valPrev = 0
+  while True:
+    valCur = 2.0**depth / (d**2.0 + 2**(2.0 * depth))
+    if sumVal == 0:
+      sumVal += valCur
+      depth +=1
+      valPrev = valCur
+    else:
+      #left = 2.0/(depth+1) * (valCur - sumVal/(depth-1))
+      #right = 1.0/depth * (valPrev - sumVal/(depth-1))
+      cond = 2.0 * depth * valCur - (depth+1) * valPrev - sumVal
+      #assert ((left > right) == (cond > 0)) 
+      #print depth, valPrev, valCur, sumVal, left, right
+      if sumVal == 0 or cond > 0:
+        sumVal += valCur
+        depth +=1
+        valPrev = valCur
+      else:
+        break
+  diff = abs(depth-1 - math.log(d,2))
+  #print d, depth -1, math.log(d,2), diff
+  if dump:
+    return (diff, d, depth-1, math.log(d,2))
+  else:
+    return depth-1
+  #propStop = max(1, math.ceil(math.log(d, 2))) + 1
+  # if depth != propStop and depth != propStop-1:
+  #   print d, depth, propStop
+
+def approxOptimalDepth(ds):
+  depths = []
+  for d in ds:
+    depths.append(getOptimalDepth(d))
+
+  frs = np.logspace(math.log(ds[0],10), math.log(ds[-1],10), 500)
+  rDepths1 = []
+  rDepths2 = []
+  for fr in frs:
+    rDepths1.append(math.log(fr,2))
+    rDepths2.append(math.ceil(rDepths1[-1]))
+
+  plt.plot(ds, depths, 'bD')
+  plt.plot(frs, rDepths2, 'g', linewidth=2)
+  plt.plot(frs, rDepths1, 'r', linewidth=2)
+  plt.xscale("log")
+  plt.xlabel("PriorStd / PostStd")
+  plt.ylabel("Depth")
+  plt.title("Optimal depths given d against log(d) and ceil(log(d))")
+  plt.show()
+
+def testOptExpImprovement(ds):
+  imp = []
+  df = []
+  dr1 = []
+  dr2 = []
+  dr3 = []
+  dr4 = []
+  for d in ds:
+    imp.append(getExpMovement(d, getOptimalDepth(d)))
+    df.append(getExpMovement(d, 0))
+    dr1.append(getExpMovement(d, 5))
+    dr2.append(getExpMovement(d, 10))
+    dr3.append(getExpMovement(d, 20))
+    dr4.append(getMixExpMovement(d, [1,2,4,8,16,32,64]))
+
+  ax1, = plt.plot(ds, imp, 'bD')
+  ax2, = plt.plot(ds, df, 'r^', markersize=8)
+  ax3, = plt.plot(ds, dr1, 'kh')
+  ax4, = plt.plot(ds, dr2, 'gd')
+  ax5, = plt.plot(ds, dr3, 'm*')
+  ax6, = plt.plot(ds, dr4, 'co')
+  plt.xscale("log")
+  plt.yscale("log")
+  plt.legend([ax1,ax2,ax3,ax4,ax5,ax6],["Optimal Depth", "Depth 0", "Depth 5", "Depth 10", "Depth 20", "Depth = 2^1..2^6"], loc=3)
+  plt.xlabel("PriorStd / PostStd")
+  plt.ylabel("Movement / PostStd")
+  plt.title("Expected movement for optimal depth and several fixed depths")
+  plt.show()
+  
+if __name__ == "__main__":
   global normalData
   normalData = loadData(stocPy.getCurDir(__file__) + "/normalData_2_001_1000")
-  #getPost(8, 0, 10, 0.01, data=normalData, fn="normal8Post")
-  samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal8Dec15, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
-  stocPy.plotSamples(samples, filt=lambda x:x>1.5 and x<2.5)
-  #print samples
+  
+  #getPost(9, -15, 15, 0.001, fn="normal9Post")
+  samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal8DecU20, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
+
+  #samples = stocPy.getTimedSamples(normal9, 1, alg="met", thresh=0.1)
+  #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec15, 1, alg="met", thresh=0.1))
+  #stocPy.plotSamples(samples)
+  print samples
   #stocPy.saveRun(samples, "normal8Met3600")
 
   #with open("normal8Dec15MetRunsCorr", 'r') as f:
@@ -519,12 +842,39 @@ if __name__ == "__main__": #9northerniighT
   #with open("normal8Dec15MetRuns", 'r') as f:
   #  runs = [dict([(k, 10000 * ss.norm.cdf(v)) for (k,v) in run.items()]) for run in cPickle.load(f)]
   
-  #with open("normal8Dec15MetRunsCorr", 'w') as f:
-  #  cPickle.dump(runs, f)
-  #genRuns(normal8Dec5, "met", noRuns = 100, length = 2000, fn="normal8Dec5MetRuns", agg=True)
-  #genRuns(normal8Dec10, "met", noRuns = 100, length = 2000, fn="normal8Dec10MetRuns", agg=True)
-  #genRuns(normal8Dec15, "met", noRuns = 100, length = 2000, fn="normal8Dec15MetRuns", agg=True)
-  #runKsRuns(8)
+  """
+  for name in ["Dec15"]:
+    print name
+    with open("normal9" + name + "Timed90", 'r') as fr:
+      with open("normal9" + name + "Timed10", 'w') as fw:
+        runs = cPickle.load(fr)
+        print map(len, runs)
+        smallRuns = []
+        for run in runs:
+          lim = len(run) / 9
+          smallRuns.append(dict([(k,v) for (k,v) in run.items() if k <= lim]))
+        cPickle.dump(smallRuns, fw)
+        print map(len, smallRuns)
+  """
+  #genRuns(normal9, "met", noRuns = 100, fn="normal9Timed90", time=90)
+  #genRuns(normal9Dec5, "met", noRuns = 100, fn="normal9Dec5Timed90", agg=True, time=90)
+  #genRuns(normal9Dec10, "met", noRuns = 100, fn="normal9Dec10Timed90", agg=True, time=90)
+  #genRuns(normal9Dec15, "met", noRuns = 100, fn="normal9Dec15Timed90", agg=True, time=90)
+  #runKsRuns(9, term="Timed10")
+
+  #testMovementProb(np.logspace(-5,5,50), 1000,"Probability of moving from mode given difference between prior and post")
+  #testMovementExpectation(np.logspace(-5,5,50), 2000, priorStd = 0.3, title="Expected prop postStd moved from mode given difference between prior and post")
+  #testMovementDiff(np.logspace(-3,3,50), 10, 1, iters = 1000, title="Expected optimalMovement/movement2 given optimalPartition/partition2")
+  #testMovementDiffExp(10, 1, iters = 1000, title="Expected optimalMovement/movement2 given optimalPartition/partition2")
+  #testMovementExpConv(10, 1, iters = 1000, title="", norm=True)  
+  #getOptimalDepth(100)
+  #testMovementExpDepth(33, 1, 9, title="")
+  #diffs = []
+  #for prior in np.arange(1, 10000000001, 1000000):
+  #  diffs.append(getOptimalDepth(prior, dump=True))
+  #print max(diffs)
+  #approxOptimalDepth(np.logspace(0,9,100))
+  #testOptExpImprovement(np.logspace(-6,10,100))
   assert(False)
   samples = stocPy.readSamps("normal8Met600")
   print samples[:100]
