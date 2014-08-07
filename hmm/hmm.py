@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/home/haggis/Desktop/StocPyDev")
+import stocPyDev as stocPy
 from venture.shortcuts import *
 import ppUtils as pu
 import scipy.stats as ss
@@ -5,7 +8,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm
 import cPickle
-import stocPy
 
 obs = (0.9, 0.8, 0.7, 0, -0.025, 5, 2, 0.1, 0, 0.13, 0.45, 6, 0.2, 0.3, -1, -1)
 sProbs = (1.0/3, 1.0/3, 1.0/3)
