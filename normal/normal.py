@@ -112,7 +112,7 @@ def normal6Dec5():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -123,7 +123,7 @@ def normal6Dec5():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -134,7 +134,7 @@ def normal6Dec10():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -145,7 +145,7 @@ def normal6Dec15():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -156,7 +156,7 @@ def normal7Dec5():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 100 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -167,7 +167,7 @@ def normal7Dec10():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 100 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -178,7 +178,7 @@ def normal7Dec15():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 100 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -189,7 +189,7 @@ def normal8Dec5():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 10000 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -200,7 +200,7 @@ def normal8Dec10():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 10000 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -211,7 +211,7 @@ def normal8Dec15():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 10000 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -222,7 +222,7 @@ def normal8DecU20():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = 10000 * ss.norm.cdf(sum(ms), loc = 0, scale = 1)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
@@ -233,7 +233,7 @@ def normal9Dec5():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
 
 def normal9Dec10():
@@ -242,7 +242,7 @@ def normal9Dec10():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
 
 def normal9Dec15():
@@ -251,7 +251,7 @@ def normal9Dec15():
   ms = []
   for i in range(n):
     ms.append(stocPy.normal(0, math.sqrt(var/(2**(i+1))), obs=True))
-  ms.append(stocPy.normal(0, math.sqrt(var/(2**n))))
+  ms.append(stocPy.normal(0, math.sqrt(var/(2**n)), obs=True))
   m = sum(ms)
 
 def normal1():
@@ -313,8 +313,23 @@ def normal7():
   for datum in normalData:
     stocPy.normal(m, 1, datum)
 
-def normal8():
+def normal7Part():
+  m = stocPy.stocPrim("uniform", (0, 100), obs=True, part=10)
+  for datum in normalData:
+    stocPy.normal(m, 1, datum)
+
+def normal8Old():
   m = stocPy.unifCont(0, 10000, obs=True)
+  for datum in normalData:
+    stocPy.normal(m, 1, datum)
+
+def normal8():
+  m = stocPy.stocPrim("uniform", (0, 10000), obs=True)
+  for datum in normalData:
+    stocPy.normal(m, 1, datum)
+
+def normal8Part():
+  m = stocPy.stocPrim("uniform", (0, 10000), obs=True, part=stocPy.stocPrim("randint", (0, 51)))
   for datum in normalData:
     stocPy.normal(m, 1, datum)
 
@@ -455,7 +470,7 @@ def getPost(model, start, end, inc, aprox=True, show = True, fn=None, rfn = None
     with open(fn,'w') as f:
       cPickle.dump((xs,ys),f)
 
-def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=False, name=None, time=None):
+def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=None, name=None, time=None):
 
   if time:
     length = time
@@ -494,7 +509,7 @@ def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=F
       runs.append(stocPyFunc(model, length, alg=alg, thresh=thresh)[name])
     else:
       if agg:
-        samples = stocPy.aggDecomp(stocPyFunc(model, length, alg=alg, thresh=thresh))
+        samples = stocPy.aggDecomp(stocPyFunc(model, length, alg=alg, thresh=thresh), func=agg)
         runs.append(samples)
       else:
         samples = stocPyFunc(model, length, alg=alg, thresh=thresh)
@@ -828,20 +843,27 @@ if __name__ == "__main__":
   normalData = loadData(stocPy.getCurDir(__file__) + "/normalData_2_001_1000")
   
   #getPost(9, -15, 15, 0.001, fn="normal9Post")
-  samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal8DecU20, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
+  #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec5, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
 
-  #samples = stocPy.getTimedSamples(normal9, 1, alg="met", thresh=0.1)
+  samples = stocPy.getTimedSamples(normal8Part, 5, alg="met", thresh=0.1)
+  print samples
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec15, 1, alg="met", thresh=0.1))
   #stocPy.plotSamples(samples)
-  print samples
-  #stocPy.saveRun(samples, "normal8Met3600")
+  #print samples
+  #stocPy.saveRun(samples, "normal8U20_600")
+
+  #stocPy.calcKSTests("normal8Post", ["./normal8U20_600"], aggFreq=np.logspace(1,math.log(50000,10),10), burnIn=1000, single=True, alpha=1, names=["gigi"])
 
   #with open("normal8Dec15MetRunsCorr", 'r') as f:
   #  print map(lambda x: (min(x.values()), max(x.values())), cPickle.load(f))
 
-  #with open("normal8Dec15MetRuns", 'r') as f:
+  #with open("normal8U20Timed10", 'r') as f:
   #  runs = [dict([(k, 10000 * ss.norm.cdf(v)) for (k,v) in run.items()]) for run in cPickle.load(f)]
-  
+ 
+  #with open("normal8U20Timed10Corr",'r') as f:
+  #  runs = cPickle.load(f)
+  #print map(len, runs)
+  #print map(lambda r: sorted(r.items())[-10:], runs)
   """
   for name in ["Dec15"]:
     print name
@@ -856,7 +878,9 @@ if __name__ == "__main__":
         cPickle.dump(smallRuns, fw)
         print map(len, smallRuns)
   """
-  #genRuns(normal9, "met", noRuns = 100, fn="normal9Timed90", time=90)
+  #genRuns(normal8Part, "met", noRuns = 50, fn="normal8PartU50Timed1", time=300)
+  #genRuns(normal7, "met", noRuns = 15, fn="normal7Timed1", time=60)
+  #genRuns(normal8DecU20, "met", noRuns = 100, fn="normal8U20Timed5", agg=lambda xs: 10000 * ss.norm.cdf(sum(xs)), time=300)
   #genRuns(normal9Dec5, "met", noRuns = 100, fn="normal9Dec5Timed90", agg=True, time=90)
   #genRuns(normal9Dec10, "met", noRuns = 100, fn="normal9Dec10Timed90", agg=True, time=90)
   #genRuns(normal9Dec15, "met", noRuns = 100, fn="normal9Dec15Timed90", agg=True, time=90)
@@ -875,6 +899,13 @@ if __name__ == "__main__":
   #print max(diffs)
   #approxOptimalDepth(np.logspace(0,9,100))
   #testOptExpImprovement(np.logspace(-6,10,100))
+
+  #with open("normal8PartTimed5",'r') as f:
+  #  runs = cPickle.load(f)
+  #  print map(lambda r:sorted(r.items())[-10:], runs)
+    #print runs
+
+  #stocPy.calcKSSumms("./normal8Post", ["./normal8Timed1", "./normal8PartTimed1", "./normal8PartUTimed1", "./normal8PartU50Timed1"], aggFreq=np.logspace(1,math.log(100000,10),10), burnIn=0, names=["Depth0", "Depth10", "Depth_Unif(2,15)", "Depth_Unif(0,50)"], modelName = "NormalMean8", postXlim=[0,10000])
   assert(False)
   samples = stocPy.readSamps("normal8Met600")
   print samples[:100]
