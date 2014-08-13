@@ -1,12 +1,13 @@
 from venture.shortcuts import *
-import ppUtils as pu
+import sys
+sys.path.append("/home/haggis/Desktop/StocPyDev")
+import stocPyDev as stocPy
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import scipy.stats as ss
 import math
-import utils
 
 def branching(v, sample, burn = 0, lag = 1):
   v.assume("fib", "(lambda (n) (if (= n 0) 0 (if (= n 1) 1 (+ (fib (- n 1)) (fib (- n 2))))))")
@@ -14,7 +15,7 @@ def branching(v, sample, burn = 0, lag = 1):
   v.assume("l", "(if (< 4 r) 6 (+ (fib (* 3 r)) (poisson 4)))")
 
   v.observe("(poisson l)", "6")
-  samples = pu.posterior_samples(v, "r" ,sample, burn, lag)
+  samples = stocPy.posterior_samples(v, "r" ,sample, burn, lag)
 
   vals = map(lambda x:x[1], samples)
   plt.hist(vals,100)
@@ -29,7 +30,7 @@ def branching(v, sample, burn = 0, lag = 1):
 
   print sorted(hist.items())
   plt.show()
-  #pu.save_samples(samples, os.getcwd(), "cont600")
+  #stocPy.save_samples(samples, os.getcwd(), "cont600")
 
 def testPois(r, v, sample, burn = 0, lag = 1):
   v.assume("fib", "(lambda (n) (if (= n 0) 1 (if (= n 1) 1 (+ (fib (- n 1)) (fib (- n 2))))))")
@@ -41,7 +42,7 @@ def testPois(r, v, sample, burn = 0, lag = 1):
 
   v.assume("pl", "(poisson l)")
   v.observe("(poisson l)", "6")
-  samples = pu.posterior_samples(v, "pl" ,sample, burn, lag)
+  samples = stocPy.posterior_samples(v, "pl" ,sample, burn, lag)
 
   vals = map(lambda x:x[1], samples)
   plt.hist(vals,100)
@@ -56,7 +57,7 @@ def testPois(r, v, sample, burn = 0, lag = 1):
 
   print sorted(hist.items())
   plt.show()
-  #pu.save_samples(samples, os.getcwd(), "cont600")
+  #stocPy.save_samples(samples, os.getcwd(), "cont600")
 
 def fib0(n):
   if n == 0:
@@ -86,8 +87,7 @@ def fib1(n):
     return a+b
 """
 
-def anlPost(disp=True):
-  size = 21
+def anlPost(disp=True, rep=1, cond=6, size=21):
   pois = ss.poisson
   pois4 = {}
   for i in range(size):
@@ -108,7 +108,10 @@ def anlPost(disp=True):
 
     for val,prob in l.items():
       #print r, val, pois.pmf(6,val), prob
-      pl = pois.pmf(6,val) * prob
+      condProb = 1
+      for i in range(rep):
+        condProb *= pois.pmf(cond,val)
+      pl = condProb * prob
       if math.isnan(pl):
         pl = 0
       try:
@@ -116,7 +119,7 @@ def anlPost(disp=True):
       except:
         rs[r] = pl*pr
 
-  rs = utils.norm(rs)
+  rs = stocPy.norm(rs)
   if disp:
     print sorted(rs.items())
     print sum(rs.values())
@@ -136,7 +139,7 @@ def anlPrior():
     if i < 5:
       fib3[fib0(3*i)] = prob
   
-  fib3 = utils.norm(fib3)
+  fib3 = stocPy.norm(fib3)
   p = pois.cdf(3,4)
   print sum(pois4.values())
   print sorted(fib3.items())
@@ -177,7 +180,7 @@ def anlPrior1():
     if i < 5:
       fib3[fib1(3*i)] = prob
   
-  fib3 = utils.norm(fib3)
+  fib3 = stocPy.norm(fib3)
   p = pois.cdf(3,4)
   print sum(pois4.values())
   print sorted(fib3.items())
@@ -199,7 +202,7 @@ def anlPrior1():
       except:
         l2[v1+v2] = p1*p2
 
-  l2 = utils.norm(l2)
+  l2 = stocPy.norm(l2)
   print sorted(l2.items())
   print sum(l2.values())
 
@@ -265,7 +268,7 @@ def anlLik(plot=True, trans=True, twoDim = True):
     else:
       Xs = []
       Ys = []
-      lik = utils.norm(lik)
+      lik = stocPy.norm(lik)
       [(Xs.append(x), Ys.append(y)) for x,y in sorted(lik.items())]
       plt.plot(Xs, Ys, 'D')
       plt.xlabel("pois1", size=20)
@@ -300,7 +303,7 @@ if __name__ == "__main__":
   #v = make_church_prime_ripl()
   #branching(v, 10000)
   #testPois(3, v, 100)
-  #print anlPost()
+  print anlPost(rep = 100, cond=1, size=101)
   #anlPrior()
   #getTransProb(anlLik(False), tr = 0)
-  anlLik(trans=True, twoDim=True)
+  #anlLik(trans=True, twoDim=True)

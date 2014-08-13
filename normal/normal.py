@@ -329,7 +329,12 @@ def normal8():
     stocPy.normal(m, 1, datum)
 
 def normal8Part():
-  m = stocPy.stocPrim("uniform", (0, 10000), obs=True, part=stocPy.stocPrim("randint", (0, 51)))
+  m = stocPy.stocPrim("uniform", (0, 10000), obs=True, part=stocPy.stocPrim("randint", (0, 21)))
+  for datum in normalData:
+    stocPy.normal(m, 1, datum)
+
+def normal8Part2():
+  m = stocPy.stocPrim("uniform", (0, 10000), obs=True, part=10)
   for datum in normalData:
     stocPy.normal(m, 1, datum)
 
@@ -845,8 +850,8 @@ if __name__ == "__main__":
   #getPost(9, -15, 15, 0.001, fn="normal9Post")
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec5, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
 
-  samples = stocPy.getTimedSamples(normal8Part, 5, alg="met", thresh=0.1)
-  print samples
+  #samples = stocPy.getTimedSamples(normal8Part, 5, alg="met", thresh=0.1)
+  #print samples
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec15, 1, alg="met", thresh=0.1))
   #stocPy.plotSamples(samples)
   #print samples
@@ -878,7 +883,9 @@ if __name__ == "__main__":
         cPickle.dump(smallRuns, fw)
         print map(len, smallRuns)
   """
-  #genRuns(normal8Part, "met", noRuns = 50, fn="normal8PartU50Timed1", time=300)
+  genRuns(normal8Part, "met", noRuns = 20, fn="normal8PartU20Timed10", time=600)
+  #genRuns(normal8Part2, "met", noRuns = 20, fn="normal8Part10Timed10", time=600)
+  #genRuns(normal8Old, "met", noRuns = 20, fn="normal8Timed10", time=600)
   #genRuns(normal7, "met", noRuns = 15, fn="normal7Timed1", time=60)
   #genRuns(normal8DecU20, "met", noRuns = 100, fn="normal8U20Timed5", agg=lambda xs: 10000 * ss.norm.cdf(sum(xs)), time=300)
   #genRuns(normal9Dec5, "met", noRuns = 100, fn="normal9Dec5Timed90", agg=True, time=90)
@@ -904,8 +911,9 @@ if __name__ == "__main__":
   #  runs = cPickle.load(f)
   #  print map(lambda r:sorted(r.items())[-10:], runs)
     #print runs
-
-  #stocPy.calcKSSumms("./normal8Post", ["./normal8Timed1", "./normal8PartTimed1", "./normal8PartUTimed1", "./normal8PartU50Timed1"], aggFreq=np.logspace(1,math.log(100000,10),10), burnIn=0, names=["Depth0", "Depth10", "Depth_Unif(2,15)", "Depth_Unif(0,50)"], modelName = "NormalMean8", postXlim=[0,10000])
+  #with open(stocPy.getCurDir(__file__) + "/normal8Post", 'r') as f:
+  #  print cPickle.load(f)
+  stocPy.calcKSSumms("./normal8Post", ["./normal8Timed10", "./normal8Part10Timed10", "./normal8PartU20Timed10"], aggFreq=np.logspace(1,math.log(100000,10),10), burnIn=0, names=["Depth0", "Depth10", "Depth_Unif(0,20)"], modelName = "NormalMean", postXlim=[0,10000], ylim=[2.0**(-3),1.1], xlim=10000)
   assert(False)
   samples = stocPy.readSamps("normal8Met600")
   print samples[:100]

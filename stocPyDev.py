@@ -52,7 +52,7 @@ def beta(a, b, cond = None, obs=False, name = None):
   return getERP(name, cond, erps["beta"], (a, b))
 
 def stocPrim(distName, params, cond=None, obs=False, name=None, part=None):
-  if part:
+  if part != None:
     global partName
     global partFunc
     depth = part
@@ -62,12 +62,16 @@ def stocPrim(distName, params, cond=None, obs=False, name=None, part=None):
       pName = name + "-" + str(i)
       ns.append(normal(0, math.sqrt(1.0/(2.0**i)), obs=obs, name = pName))
       partName[pName] = name
-    pName = name + "-" + str(i) + "-r"
+    pName = name + "-" + str(depth) + "-r"
     ns.append(normal(0, math.sqrt(1.0/(2.0**depth)), obs=obs, name = pName))
     partName[pName] = name
     dist = getattr(ss, distName)
-    partFunc[name] = lambda xs: dist.ppf(ss.norm.cdf(sum(xs)), *params)
-    return dist.ppf(ss.norm.cdf(sum(ns)), *params)
+    if isinstance(dist, ss.rv_discrete):
+      func = lambda xs: int(dist.ppf(ss.norm.cdf(sum(xs)), *params))
+    else:
+      func = lambda xs: dist.ppf(ss.norm.cdf(sum(xs)), *params)
+    partFunc[name] = func 
+    return func(ns)
   else:
     if distName not in erps:
       erps[distName] = len(erps)
@@ -210,7 +214,7 @@ class RewriteModel(ast.NodeTransformer):
   def visit_Call(self, node, parent):
     callType = dict(ast.iter_fields(dict(ast.iter_fields(node))['func'])).get('attr',None)
     if callType in erps.keys() or callType == "stocPrim":
-      dict(ast.iter_fields(node))['keywords'].append(ast.keyword(arg='name', value=ast.BinOp(left=ast.Str(s=self.funcName + "-" + str(node.lineno) + "-"), op=ast.Add(), right=ast.Call(func=ast.Name(id='str', ctx=ast.Load()), args=[ast.Subscript(value=ast.Name(id=self.tempName, ctx=ast.Load()), slice=ast.Index(value=ast.Num(n=-1)), ctx=ast.Load())], keywords=[], starargs=None, kwargs=None))))
+      dict(ast.iter_fields(node))['keywords'].append(ast.keyword(arg='name', value=ast.BinOp(left=ast.Str(s=self.funcName + "-" + str(node.lineno) + "-" + str(node.col_offset) + "-"), op=ast.Add(), right=ast.Call(func=ast.Name(id='str', ctx=ast.Load()), args=[ast.Subscript(value=ast.Name(id=self.tempName, ctx=ast.Load()), slice=ast.Index(value=ast.Num(n=-1)), ctx=ast.Load())], keywords=[], starargs=None, kwargs=None))))
       ast.fix_missing_locations(node)
       #print map(ast.dump, dict(ast.iter_fields(node))['keywords'])
     self.generic_visit(node)
@@ -359,7 +363,7 @@ def aggSamples(samples):
   for k,vs in aggSamps.items():
     for count,v in vs.items():
       if k in partFunc:
-        val = partFunc[k](v)
+	val = partFunc[k](v)
         aggSamps[k][count] = val 
       else:
 	assert(len(v)==1)
@@ -776,8 +780,11 @@ def plotCumSampDist(fn, plot=True, show=True, xlim = None):
   return locs, cSamps
 
 def plotCumPost(fn = "Posterior4", plot = True, show=True, zipRez=True, xlim=None):
-  with open(fn,'r') as f:
-    ds, ls = cPickle.load(f)
+  if isinstance(fn, basestring): 
+    with open(fn,'r') as f:
+      ds, ls = cPickle.load(f)
+  else:
+    ds, ls = zip(*sorted(fn.items()))
   cls = []
   curSum = 0
   for l in ls:
@@ -907,7 +914,7 @@ def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=N
     plt.title("Performance on " + modelName + " Model", size=30)
     plt.show()
 
-def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, postXlim=None):
+def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, postXlim=None, ylim = None):
   postFun = interpolate.interp1d(*plotCumPost(pfn, plot=False, zipRez=False, xlim=postXlim))
   ps = []
   ns = []
@@ -924,7 +931,7 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
     with open(fn, 'r') as f:
       runs = cPickle.load(f)
     for r in range(len(runs)):
-      print fn, r
+      print fn, r 
       xs, ys = calcKSRun(postFun, runs[r], aggFreq, burnIn)
       if len(xs) == 0:
         continue
@@ -952,8 +959,8 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
       bot.append(np.percentile(vals, 75))
 
     plt.plot(range(start, end), med, cols[i], linewidth=2, alpha=0.9)
-    plt.plot(range(start, end), top, cols[i], linewidth=2, alpha=0.9)
-    plt.plot(range(start, end), bot, cols[i], linewidth=2, alpha=0.9)
+    plt.plot(range(start, end), top, cols[i] + "--", linewidth=2, alpha=0.9)
+    plt.plot(range(start, end), bot, cols[i] + "--", linewidth=2, alpha=0.9)
 
   if not names:
     names = ns
@@ -961,6 +968,8 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
   plt.xscale("log")
   plt.yscale("log", basey=2)
   plt.xlim([0, xlim])
+  if ylim:
+    plt.ylim(ylim)
   plt.xlabel("Trace likelihood calculations", size=20)
   plt.ylabel("KS difference from posterior", size=20)
   if not modelName:
@@ -982,7 +991,10 @@ def calcKSDiff(postFun, samps):
     try:
       post = cachedPost[samps]
     except:
-      post = postFun(samp)
+      try:
+        post = postFun(samp)
+      except:
+	print samp 
       cachedPost[samp] = post
     preDiff = abs(post - cumProb)
     cumProb += inc
@@ -1067,8 +1079,8 @@ def calcKLTest(post, samps, freq = float("inf"), show=True, col=None, plot=True,
       ax, = plt.plot(xs,ys, col, alpha=0.15)
     else:
       ax, = plt.plot(xs,ys)
-    plt.yscale("log", basey=2)
-    plt.xscale("log")
+    #plt.yscale("log", basey=2)
+    #plt.xscale("log")
     if show:
       plt.show()
 
