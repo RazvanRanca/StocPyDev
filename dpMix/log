@@ -1,0 +1,963 @@
+0 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -3.56912420411 -47.3532621284
+1 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -5.22402449062 -51.1849332914
+2 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -7.3034660323 Warning: The integral is probably divergent, or slowly convergent.
+-54.5181521565
+3 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -6.76114174147 -54.8126958283
+4 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -8.55622900079 -56.463568278
+5 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.9150689435
+6 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.915046979
+7 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -8.1647275997 -58.2095906509
+8 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.24937618135 -57.6034064978
+9 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.8056641792 -59.7325430773
+10 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -10.4988113598 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-60.8498962174
+11 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1444398892
+12 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.8056641792 -59.6641145518
+13 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1156152172
+14 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1155932528
+15 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05, 0.0]] -9.41416277811 -61.4101369246
+16 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -9.47251973267 -57.9567979946
+17 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.316489803 -60.5116503573
+18 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.26843646
+19 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.8727778008 -62.5629801318
+20 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.1666714966
+21 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6181721621
+22 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6181501976
+23 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9126938695
+24 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.316489803 -60.3812374256
+25 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.8727778008 -62.5103740051
+26 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6277271452
+27 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.922270817
+28 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.8727778008 -62.4419454796
+29 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.8934461451
+30 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.8934241806
+31 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05, 0.0]] -10.4812763997 -64.1879678524
+32 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -9.24937618135 -57.5169959728
+33 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -10.316489803 -60.3399664668
+34 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -11.7027841641 Warning: The integral is probably divergent, or slowly convergent.
+-62.4799685215
+35 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -11.1604598733 -62.7745121933
+36 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.1082492722 -62.9764984701
+37 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.4279991356
+38 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.4279771711
+39 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -11.7167478711 -64.7225208429
+40 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -11.7027841641 Warning: The integral is probably divergent, or slowly convergent.
+-62.3045019424
+41 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.4336385219
+42 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.9522193425 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.550991662
+43 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8455353338
+44 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.3652099964
+45 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8167106618
+46 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8166886974
+47 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.1112323692
+48 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -10.316489803 -60.1443402333
+49 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.1604598733 -62.699192596
+50 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.4559786986
+51 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.7167478711 -64.7505223705
+52 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.3542137353
+53 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8057144008
+54 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8056924363
+55 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.1002361082
+56 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.1604598733 -62.5687796643
+57 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.7167478711 -64.6979162438
+58 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8152693839
+59 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.1098130557
+60 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.7167478711 -64.6294877183
+61 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.0809883837
+62 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.0809664192
+63 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05, 0.0]] -11.32524647 -66.3755100911
+64 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -8.55622900079 -56.5381764093
+65 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -9.8056641792 -59.6747996891
+66 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.2017133382
+67 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -10.8727778008 -62.4962570101
+68 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.1082492722 -63.1833294441
+69 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6348301095
+70 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6348081451
+71 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -11.7167478711 -64.9293518169
+72 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.1082492722 -63.1883211892
+73 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.66453727 -65.3174577687
+74 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.4348109088
+75 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7293545806
+76 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.66453727 -65.2490292432
+77 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7005299086
+78 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7005079442
+79 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05, 0.0]] -12.2730358689 -66.995051616
+80 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.1165833578
+81 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6714357205
+82 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.4282218232
+83 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.722765495
+84 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.3264568598
+85 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7779575253
+86 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7779355608
+87 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0724792327
+88 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.5410227888
+89 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6701593683
+90 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7875125084
+91 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0820561802
+92 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6017308428
+93 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0532315082
+94 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0532095438
+95 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3477532156
+96 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -9.8056641792 -59.6960193668
+97 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -10.8727778008 -62.5189898608
+98 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6589919154
+99 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -11.7167478711 -64.9535355873
+100 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.66453727 -65.1555218641
+101 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6070225295
+102 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6070005651
+103 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.2730358689 -66.9015442369
+104 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.4835253363
+105 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6126619158
+106 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7300150559
+107 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0245587278
+108 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.5442333903
+109 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9957340558
+110 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9957120913
+111 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2902557632
+112 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -10.8727778008 -62.3233636272
+113 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -11.7167478711 -64.8782159899
+114 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6350020926
+115 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.2730358689 -66.9295457645
+116 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.5332371293
+117 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9847377948
+118 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9847158303
+119 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2792595021
+120 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -11.7167478711 -64.7478030582
+121 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.2730358689 -66.8769396377
+122 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9942927778
+123 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2888364497
+124 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.2730358689 -66.8085111122
+125 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2600117777
+126 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2599898132
+127 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05, 0.0]] -11.8815344679 -68.5545334851
+128 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -7.3034660323 Warning: The integral is probably divergent, or slowly convergent.
+-54.5681442086
+129 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.9693252687
+130 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -10.4988113598 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-60.8095709086
+131 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1041145805
+132 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.1779037904
+133 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6294044559
+134 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6293824914
+135 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9239261633
+136 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.7027841641 Warning: The integral is probably divergent, or slowly convergent.
+-62.6547728542
+137 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.7839094337
+138 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.9522193425 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9012625739
+139 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1958062457
+140 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.7154809082
+141 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1669815737
+142 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1669596092
+143 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1], [0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4615032811
+144 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -11.4151020916 Warning: The integral is probably divergent, or slowly convergent.
+-62.2345671694
+145 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.7894195321
+146 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.5462056348
+147 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.8407493067
+148 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.4444406715
+149 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.895941337
+150 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.8959193725
+151 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1904630443
+152 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6590066004
+153 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7881431799
+154 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.90549632
+155 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.2000399919
+156 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7197146544
+157 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1712153199
+158 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1711933554
+159 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.4657370273
+160 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -10.4988113598 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-60.8531071714
+161 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.6760776655
+162 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -12.9522193425 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.8160797201
+163 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1106233919
+164 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.3576844506 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.3126096687
+165 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7641103342
+166 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7640883697
+167 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0586320416
+168 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -12.9522193425 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.640613141
+169 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7697497205
+170 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -14.2016545209 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.8871028606
+171 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1816465324
+172 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.701321195
+173 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1528218605
+174 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.152799896
+175 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4473435678
+176 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.4804514319
+177 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.0353037946
+178 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7920898973
+179 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0866335691
+180 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.690324934
+181 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1418255994
+182 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.141803635
+183 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4363473068
+184 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9048908629
+185 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0340274424
+186 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1513805825
+187 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4459242543
+188 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9655989169
+189 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4170995824
+190 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4170776179
+191 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7116212897
+192 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.989918181
+193 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1265414609
+194 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.65345511
+195 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9479987818
+196 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6350712158
+197 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.0865718813
+198 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.0865499168
+199 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.3810935887
+200 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6400629609
+201 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7691995404
+202 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.8865526805
+203 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1810963524
+204 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7007710149
+205 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1522716804
+206 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1522497159
+207 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.4467933878
+208 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.5683251295
+209 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1231774922
+210 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.8799635949
+211 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1745072668
+212 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7781986316
+213 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2296992971
+214 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2296773326
+215 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.5242210044
+216 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9927645605
+217 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.12190114
+218 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2392542801
+219 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.533797952
+220 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0534726145
+221 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.50497328
+222 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.5049513155
+223 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7994949874
+224 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1477611385
+225 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9707316326
+226 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1107336872
+227 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.405277359
+228 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6072636358
+229 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0587643013
+230 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0587423368
+231 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3532860087
+232 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9352671081
+233 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0644036876
+234 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1817568277
+235 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4763004995
+236 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9959751621
+237 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4474758276
+238 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4474538631
+239 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7419975349
+240 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.775105399
+241 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.3299577617
+242 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0867438644
+243 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3812875362
+244 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9849789011
+245 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4364795665
+246 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4364576021
+247 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7310012739
+248 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.19954483
+249 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3286814095
+250 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4460345496
+251 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7405782214
+252 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.260252884
+253 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7117535495
+254 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.711731585
+255 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1], [0.05, 0.0]] -12.0323573576 Warning: The integral is probably divergent, or slowly convergent.
+-70.0062752568
+256 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -5.22402449062 -51.2099569972
+257 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -6.76114174147 -54.8400185382
+258 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.944576339
+259 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -8.1647275997 -58.2391200108
+260 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -9.8056641792 -59.6259580824
+261 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.0774587478
+262 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.0774367834
+263 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -9.41416277811 -61.3719804552
+264 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -10.316489803 -60.4721787679
+265 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -10.8727778008 -62.6013153474
+266 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.7186684875
+267 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-64.0132121593
+268 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -10.8727778008 -62.5328868219
+269 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9843874874
+270 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9843655229
+271 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1, 0.05], [0.0]] -10.4812763997 -64.2789091947
+272 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -10.316489803 -60.4957519579
+273 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.1604598733 -63.0506043206
+274 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.8073904233
+275 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.7167478711 -65.1019340951
+276 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.7056254599
+277 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1571261254
+278 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1571041609
+279 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4516478328
+280 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.1604598733 -62.9201913889
+281 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.7167478711 -65.0493279684
+282 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1666811085
+283 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4612247803
+284 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.7167478711 -64.9808994429
+285 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4324001084
+286 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4323781439
+287 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01, 0.1, 0.05], [0.0]] -11.32524647 -66.7269218157
+288 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -9.8056641792 -59.6960186765
+289 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -10.8727778008 -62.5189891705
+290 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6589912251
+291 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -11.7167478711 -64.953534897
+292 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.66453727 -65.1555211737
+293 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6070218392
+294 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6069998747
+295 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.2730358689 -66.9015435466
+296 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.483524646
+297 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6126612255
+298 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7300143656
+299 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0245580375
+300 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.5442327
+301 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9957333655
+302 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.995711401
+303 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01, 0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2902550728
+304 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -10.8727778008 -62.3233629369
+305 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -11.7167478711 -64.8782152996
+306 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6350014023
+307 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.2730358689 -66.9295450741
+308 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.533236439
+309 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9847371044
+310 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.98471514
+311 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2792588118
+312 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -11.7167478711 -64.7478023679
+313 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.2730358689 -66.8769389474
+314 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9942920875
+315 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2888357593
+316 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.2730358689 -66.8085104219
+317 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2600110874
+318 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.2599891229
+319 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01, 0.1, 0.05], [0.0]] -11.8815344679 -68.5545327947
+320 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -8.70705189053 Warning: The integral is probably divergent, or slowly convergent.
+-57.989918681
+321 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1265419609
+322 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.65345561
+323 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9479992818
+324 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6350717158
+325 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.0865723813
+326 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.0865504168
+327 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.3810940887
+328 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.2590721619 Warning: The integral is probably divergent, or slowly convergent.
+-64.6400634609
+329 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7692000404
+330 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.8865531805
+331 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1810968524
+332 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.7007715149
+333 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1522721804
+334 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1522502159
+335 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0, 0.01], [0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.4467938878
+336 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -11.5659249814 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-63.5683256295
+337 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1231779922
+338 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.8799640949
+339 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.1745077668
+340 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.5085073403 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.7781991316
+341 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2296997971
+342 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2296778326
+343 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.5242215045
+344 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9927650605
+345 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.12190164
+346 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.2392547802
+347 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.533798452
+348 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0534731145
+349 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.50497378
+350 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.5049518155
+351 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0, 0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7994954874
+352 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1477616386
+353 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9707321326
+354 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.1107341872
+355 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4052778591
+356 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.8153601598 Warning: The integral is probably divergent, or slowly convergent.
+-66.6072641358
+357 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0587648013
+358 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0587428368
+359 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3532865087
+360 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-65.9352676081
+361 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0644041876
+362 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -13.6593302301 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.1817573277
+363 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4763009996
+364 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9959756621
+365 [[1.0], [1.1, 1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4474763276
+366 [[1.0, 1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4474543631
+367 [[1.0], [1.1], [1.2], [-10.0], [-15.0, -20.0], [0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7419980349
+368 [[1.0, 1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.775105899
+369 [[1.0], [1.1, 1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.3299582617
+370 [[1.0, 1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-68.0867443644
+371 [[1.0], [1.1], [1.2, -10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3812880362
+372 [[1.0, 1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.9661830495 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-67.9849794011
+373 [[1.0], [1.1, 1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4364800665
+374 [[1.0, 1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4364581021
+375 [[1.0], [1.1], [1.2], [-10.0, -15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7310017739
+376 [[1.0, 1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.19954533
+377 [[1.0], [1.1, 1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.3286819095
+378 [[1.0, 1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -13.1170059392 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.4460350496
+379 [[1.0], [1.1], [1.2, -10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7405787214
+380 [[1.0, 1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.4238587587 Warning: The integral is probably divergent, or slowly convergent.
+-68.260253384
+381 [[1.0], [1.1, 1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.7117540495
+382 [[1.0, 1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.5746816484 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-69.711732085
+383 [[1.0], [1.1], [1.2], [-10.0], [-15.0], [-20.0], [0.01], [0.1, 0.05], [0.0]] -12.0323573576 Warning: The integral is probably divergent, or slowly convergent.
+-70.0062757568
+384 [[1.0, 1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -6.76114174147 -54.8627996757
+385 [[1.0], [1.1, 1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -8.1647275997 -58.2639807359
+386 [[1.0, 1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -9.95648706893 Warning: The integral is probably divergent, or slowly convergent.
+-61.1042263757
+387 [[1.0], [1.1], [1.2, -10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -9.41416277811 -61.3987700476
+388 [[1.0, 1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -10.8727778008 -62.4725592576
+389 [[1.0], [1.1, 1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.924059923
+390 [[1.0, 1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.0236006905 Warning: The integral is probably divergent, or slowly convergent.
+-63.9240379585
+391 [[1.0], [1.1], [1.2], [-10.0, -15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -10.4812763997 -64.2185816304
+392 [[1.0, 1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.1604598733 -62.9494283214
+393 [[1.0], [1.1, 1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.7167478711 -65.0785649009
+394 [[1.0, 1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -12.4098950517 Warning: The integral is probably divergent, or slowly convergent.
+Warning: The integral is probably divergent, or slowly convergent.
+-66.195918041
+395 [[1.0], [1.1], [1.2, -10.0], [-15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.8675707608 Warning: The integral is probably divergent, or slowly convergent.
+-66.4904617128
+396 [[1.0, 1.1, 1.2], [-10.0], [-15.0, -20.0, 0.01, 0.1], [0.05], [0.0]] -11.7167478711

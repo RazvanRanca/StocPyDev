@@ -2,14 +2,19 @@ import sys
 sys.path.append("/home/haggis/Desktop/StocPyDev")
 import stocPyDev as stocPy
 from venture.shortcuts import *
-import ppUtils as pu
 import scipy.stats as ss
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm
 import cPickle
+import ppUtils as pu
+from collections import Counter
+import time
+import copy
 
-obs = (0.9, 0.8, 0.7, 0, -0.025, 5, 2, 0.1, 0, 0.13, 0.45, 6, 0.2, 0.3, -1, -1)
+#obs = (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+obs = (0.9, 0.8, 0.7, 0.0, -0.025, 5.0, 2.0, 0.1, 0.0, 0.13, 0.45, 6.0, 0.2, 0.3, -1.0, -1.0)
+
 sProbs = (1.0/3, 1.0/3, 1.0/3)
  
 tProbs = {
@@ -114,7 +119,7 @@ def hmmVenture(v, xs, a_0, a, em, samples, burn = 0, step = 1):
 
   #v.assume("s16", "(getState 16)")
   [v.assume("s" + str(i), "(getState " + str(i) +")") for i in range(17)]
-  #return map(lambda (x,y): y, pu.posterior_samples(v, "s16", samples, burn, step))
+  #return map(lambda (x,y): y, stocPy.posterior_samples(v, "s16", samples, burn, step))
   return pu.posterior_mult_samples(v, ["s" + str(i) for i in range(17)], samples, burn, step)
 
 stateDic = {}
@@ -132,17 +137,169 @@ def getState(index):
     stateDic[index] = state
     return state
 
-def hmm(init=False):
-  pass
+def categoricalExp(ps, name): #scipy.stats has no categorical. Should implement this in StocPy eventually.
+  assert(abs(sum(ps) - 1) < 0.0001)
+  c = stocPy.unifCont(0,1, name=name) 
+  s = 0
+  for i in range(len(ps)):
+    s += ps[i]
+    if s > c:
+      return i
+  assert(False) #shouldn't ever get here
+
+stateHist = [] 
+singleStateHist = {}
+def hmmExp():
+  states = []
+  states.append(categoricalExp(sProbs, name="s0"))
+  for i in range(1,17):
+    states.append(categoricalExp(tProbs[states[i-1]], name="s"+str(i)))
+    stocPy.normal(eMeans[states[i]], 1, cond=obs[i-1], name="c"+str(i))
+  global stateHist
+  global singleStateHist
+  curTime = time.time() - startTime
+  singleStateHist[curTime] = states[sind]
+  #stateHist[curTime] = tuple(states)
+  #for i in range(len(states)):
+  #  try:
+  #    stateHist[i][curTime] = states[i]
+  #  except:
+  #    stateHist.append({curTime:states[i]})
+
+def categorical(ps): #scipy.stats has no categorical. Should implement this in StocPy eventually.
+  assert(abs(sum(ps) - 1) < 0.0001)
+  c = stocPy.stocPrim("uniform", (0,1), part=pind) 
+  s = 0
+  for i in range(len(ps)):
+    s += ps[i]
+    if s > c:
+      return i
+  assert(False) #shouldn't ever get here
+
+def hmm():
+  states = []
+  states.append(stocPy.stocPrim("Categorical", (sProbs,), obs=True, part=pind))
+  for i in range(1,17):
+    #print states
+    states.append(stocPy.stocPrim("Categorical", (tProbs[states[i-1]],), obs=True, part=pind))
+    stocPy.normal(eMeans[states[i]], 1, cond=obs[i-1])
+
+def hmmSpec():
+  states = []
+  states.append(categorical(sProbs))
+  for i in range(1,17):
+    states.append(categorical(tProbs[states[i-1]]))
+    stocPy.normal(eMeans[states[i]], 1, cond=obs[i-1])
+  #global singleStateHist
+  curTime = time.time() - startTime
+  #singleStateHist[curTime] = states[sind]
+  global stateHist
+  for i in range(len(states)):
+    try:
+      stateHist[i][curTime] = states[i]
+    except:
+      stateHist.append({curTime:states[i]})
+
+def hmm1():
+  states = []
+  states.append(categorical(sProbs))
+  for i in range(1,17):
+    states.append(categorical(tProbs[states[i-1]]))
+  for i in range(1,17):
+    stocPy.normal(eMeans[states[i]], 1, cond=obs[i-1])
+  global singleStateHist
+  curTime = time.time() - startTime
+  singleStateHist[curTime] = states[sind]
+  #global stateHist
+  #curTime = time.time() - startTime
+  #stateHist[curTime] = tuple(states)
+  #for i in range(len(states)):
+  #  try:
+  #    stateHist[i][curTime] = states[i]
+  #  except:
+  #    stateHist.append({curTime:states[i]})
+
+def genRuns(model, noRuns, runTime, fn, alg, autoNames=False, discAll=False):
+  global startTime
+  global stateHist
+  global singleStateHist
+  runs = []
+  for i in range(noRuns):
+    print str(model), "Run", i
+    #startTime = time.time()
+    samples = stocPy.getTimedSamples(model, runTime, alg=alg, autoNames=autoNames, discAll=discAll, orderNames=True)
+    #print map(lambda x: dict([(k,v/float(len(stateHist))) for (k,v) in sorted(dict(Counter(x)).items())]), zip(*stateHist))
+    runs.append(samples)#copy.deepcopy(stateHist))#singleStateHist))#map(lambda x: dict([(k,v/float(len(stateHist))) for (k,v) in sorted(dict(Counter(x)).items())]), zip(*stateHist)))
+    #stateHist = []
+    #singleStateHist = {}
+  cd = stocPy.getCurDir(__file__)
+  #print runs
+  with open(cd + "/" + fn, 'w') as f:
+    cPickle.dump(runs, f)
+
+def showRuns(fn, proc=False):
+  with open(fn, 'r') as f:
+    runs = cPickle.load(f)
+  for run in runs:
+    if proc:
+      run = map(lambda dic: dict([(k,v/float(len(dic))) for (k,v) in dict(Counter(dic.values())).items()]), run)
+    print run
+    vals = [[],[],[]]
+    for col in run:
+      vals[0].append(col.get(0,0))
+      vals[1].append(col.get(1,0))
+      vals[2].append(col.get(2,0))
+    plotHeatMap(vals)
+
+def procRuns(posts, fns, names, proc=False, aggSums = True):
+  runs = []
+  for fn in fns:
+    with open(fn, 'r') as f:
+      samples = cPickle.load(f)
+      if proc:
+        for run in samples:
+          dic = []      
+          for curTime, states in sorted(run.items()):
+            for i in range(len(states)):
+              try:
+                dic[i][curTime] = states[i]
+              except:
+                dic.append({curTime:states[i]})
+          runs.append(copy.deepcopy(dic))
+      else:
+        runs.append(samples)
+  print map(len, runs)
+  print map(len, runs[0])
+  #print map(len, runs[0][0])
+  #print '\n'.join([str([dict([(k,str(v/float(len(runs[m][r])))[:5]) for (k,v) in dict(Counter(runs[m][r].values())).items()]) for r in range(len(runs[0]))]) for m in range(len(runs))])
+  print posts
+  stocPy.calcKLSumms(posts, runs, names=names, burnIn = 0, aggSums=aggSums, title="Performance on HMM model")# + str(sind), xlabel="Seconds")
 
 if __name__ == "__main__":
+  #hmmPost()
+  global sind
+  global pind
+  sind = 5 
+  pind = None
+  #genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunMet_10_600", alg="met", discAll = True, autoNames=True)
+  #showRuns("hmmRunMet_2_test_"+str(sind), proc=True)
+  #assert(False)
+  #genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunSliceTD_10_600", alg="sliceTD", discAll=True, autoNames=True)
+  pind = 1
+  genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunPart1_10_600", alg="met", autoNames=True)
+  posts = fwd_bkw(obs, sProbs, tProbs, eProbs)#[sind]
+  #procRuns(posts, ["hmmRunMet_2_test_"+str(sind), "hmmRunSliceTD_2_test_"+str(sind)], ["Met", "SliceTD"], proc=False, aggSums=True)
+  #procRuns(posts, ["hmmRunMet_10_600", "hmmRunPart1_10_600", "hmmRunSliceTD_10_600"], ["Met", "Part5", "SliceTD"], proc=False, aggSums=True)
+  procRuns(posts, ["hmmRunPart1_10_600"], ["Part1"], proc=False, aggSums=True)
+  #stocPy.getTimedSamples(hmm, 30, alg="met")
+  #print '\n'.join(map(lambda x: str([(k,str(v/float(len(stateHist)))[:5]) for (k,v) in sorted(dict(Counter(x)).items())]), zip(*stateHist)))
   #v = make_church_prime_ripl()
-  #with open("hmm/hmmVenture50k", 'w') as f:
-  #  cPickle.dump(hmmVenture(v, obs, sProbs, tProbs, eMeans, 50000), f)
+  #with open("hmmVenture10k", 'w') as f:
+  #  cPickle.dump(hmmVenture(v, obs, sProbs, tProbs, eMeans, 10000), f)
 
   #samps = hmmVenture(v, obs, sProbs, tProbs, eMeans, 10000)
   #norm = float(len(samps))
   #print samps.count(0) / norm, samps.count(1) / norm, samps.count(2) / norm
   #hmmPost()
-  genHeatMap(fn = "hmm/hmmVenture50k")
+  #genHeatMap(fn = "hmmVenture10k")
   #hmmPost()

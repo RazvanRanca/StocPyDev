@@ -291,10 +291,7 @@ def normal4():
   else:
     v = stocPy.invGamma(3, 1)
     vs.append(v)
-  cond = None
-  if init:
-    cond = obs
-  stocPy.normal(m, math.sqrt(v), cond)
+  stocPy.normal(m, math.sqrt(v), cond=obs)
 
   ms.append(m)
 
@@ -492,9 +489,6 @@ def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=N
   elif model == normal3:
     name = 'normal3-22-0'
     no = 3
-  elif model == normal4:
-    name = 'normal4-49-0'
-    no = 4
   elif model == normal1Dec:
     name = None
     no = 1
@@ -557,18 +551,18 @@ def runKsTest(mi):
   #stocPy.calcKSTest(expDir + "normal" + mi + "Post", paths, names = titles)
   stocPy.calcKSTests(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(50000,10),10), burnIn=1000, single=True, alpha=1, names=titles, ylim=[0.0225, 1.5], title="Single Run performance on NormalMean" + mi +"-prior = Unif(0,10000)")
 
-def runKsRuns(mi, term = "MetRuns"):
+def runKsRuns(mi, term = "MetRuns", paths = None, titles = None):
   mi = str(mi)
 
   expDir = stocPy.getCurDir(__file__) + "/"
 
-  paths = ["normal" + mi + term, "normal" + mi + "Dec5" + term, "normal" + mi + "Dec10" + term, "normal" + mi + "Dec15" + term]
-  titles = ["Metropolis", "Metropolis Dec5", "Metropolis Dec10", "Metropolis Dec15"]
+  if not paths:
+    paths = ["normal" + mi + term, "normal" + mi + "Dec5" + term, "normal" + mi + "Dec10" + term, "normal" + mi + "Dec15" + term]
+  if not titles:
+    titles = ["Metropolis", "Metropolis Dec5", "Metropolis Dec10", "Metropolis Dec15"]
   paths = [expDir + path for path in paths]
 
-  #stocPy.calcKSTest(expDir + "normal" + mi + "Post", paths, names = titles)
-  #stocPy.calcKSTests(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(2000,10),10), burnIn=100, postXlim = [0,10000], names=titles)
-  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(100000,10),10), burnIn=1000, names=titles, modelName = "NormalMean" + mi)
+  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(1000000,10),10), burnIn=1000, names=titles, modelName = "NormalMean" + mi)
 
 def movementFromMode((priorMean, priorStd), (postMean, postStd), curSamp, iters):
   move = []
@@ -846,7 +840,11 @@ def testOptExpImprovement(ds):
 if __name__ == "__main__":
   global normalData
   normalData = loadData(stocPy.getCurDir(__file__) + "/normalData_2_001_1000")
-  
+  genRuns(normal4, alg="met", noRuns = 10, time=6, fn="normal4MetTimed1Small") 
+  genRuns(normal4, alg="slice", noRuns = 10, time=6, fn="normal4SliceTimed1Small") 
+  genRuns(normal4, alg="sliceTD", noRuns = 10, time=6, fn="normal4SliceTDTimed1Small") 
+  runKsRuns(4, paths=["normal4MetTimed1Small", "normal4SliceTimed1Small", "normal4SliceTDTimed1Small"], titles=["Met", "Slice", "SliceTD"])
+  assert(False)
   #getPost(9, -15, 15, 0.001, fn="normal9Post")
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec5, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))
 
