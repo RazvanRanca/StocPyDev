@@ -840,10 +840,11 @@ def testOptExpImprovement(ds):
 if __name__ == "__main__":
   global normalData
   normalData = loadData(stocPy.getCurDir(__file__) + "/normalData_2_001_1000")
-  genRuns(normal4, alg="met", noRuns = 10, time=6, fn="normal4MetTimed1Small") 
-  genRuns(normal4, alg="slice", noRuns = 10, time=6, fn="normal4SliceTimed1Small") 
-  genRuns(normal4, alg="sliceTD", noRuns = 10, time=6, fn="normal4SliceTDTimed1Small") 
-  runKsRuns(4, paths=["normal4MetTimed1Small", "normal4SliceTimed1Small", "normal4SliceTDTimed1Small"], titles=["Met", "Slice", "SliceTD"])
+  genRuns(normal8, alg="sliceTD", noRuns = 10, time=60, fn="normal8SliceTimed") 
+  #genRuns(normal4, alg="met", noRuns = 10, time=6, fn="normal4MetTimed1Small") 
+  #genRuns(normal4, alg="slice", noRuns = 10, time=6, fn="normal4SliceTimed1Small") 
+  #genRuns(normal4, alg="sliceTD", noRuns = 10, time=6, fn="normal4SliceTDTimed1Small") 
+  runKsRuns(9, paths=["normal8MetRuns", "normal8SliceTimed", "normal8Dec5MetRuns", "normal8Dec15MetRuns"], titles=["Met", "Slice", "Met_Part5", "Met_Part15"])
   assert(False)
   #getPost(9, -15, 15, 0.001, fn="normal9Post")
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec5, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))

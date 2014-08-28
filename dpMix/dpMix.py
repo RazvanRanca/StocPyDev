@@ -52,25 +52,34 @@ class CRP: #anglican crp formulation: http://www.robots.ox.ac.uk/~fwood/anglican
     self.pns = []
     self.n = 0
 
-  def rvs(self):
+  def rvs(self, a = None, upperLim = None):
+    if a == None:
+      a = self.a
     self.reset()
-
-  def getParams(self, part = None):
-    if part == None:
-      return self.n, self.pns
+    if upperLim == None:
+      return lambda x: self.getClass(x)
     else:
-      return sum(map(len, part)), map(len, part)
+      self.getClass(upperLim)
+      return list(self.pns)
 
-  def pdf(self, part = None):
-    n, pns = self.getParams(part)
-    prob = (math.gamma(self.a) * self.a**(len(pns))) / math.gamma(self.a + n)
+  def getParams(self, part = None, a = None):
+    if a == None:
+      a = self.a
+    if part == None:
+      return a, self.n, self.pns
+    else:
+      return a, sum(map(len, part)), map(len, part)
+
+  def pdf(self, part = None, a = None):
+    a, n, pns = self.getParams(part, a)
+    prob = (math.gamma(a) * a**(len(pns))) / math.gamma(a + n)
     for pn in pns:
       prob *= math.gamma(pn)
     return prob
 
-  def logpdf(self, part = None):
-    n, pns = self.getParams(part)
-    lprob = math.lgamma(self.a) + len(pns)*math.log(self.a) - math.lgamma(self.a + n)
+  def logpdf(self, part = None, a = None):
+    a, n, pns = self.getParams(part, a)
+    lprob = math.lgamma(a) + len(pns)*math.log(a) - math.lgamma(a + n)
     for pn in pns:
       lprob += math.lgamma(pn)
     return lprob
