@@ -1029,6 +1029,7 @@ def calcKSRun(postFun, run, aggFreq, burnIn):
   curAgg = 0
   if isinstance(run, list):
     run = dict([(i+1, run[i]) for i in range(len(run))])
+  print burnIn, len(run)
   for k, samp in sorted(run.items()):
     if k < burnIn:
       continue
@@ -1136,7 +1137,7 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
 
   if not names:
     names = ns
-  plt.legend(ps,names,loc=3)
+  plt.legend(ps,names,loc=1)
   plt.xscale("log")
   plt.yscale("log", basey=2)
   plt.xlim([0, xlim])
