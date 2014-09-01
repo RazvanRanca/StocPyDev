@@ -86,7 +86,7 @@ if __name__ == "__main__":
   #assert(False)
   no = "1"
   iters = 5
-  time = 30
+  time = 3
   term = "_" + str(iters) + "_" + str(time)
   global noLetters
   noLetters = getattr(sys.modules[__name__], "noLetters" + no)
@@ -100,10 +100,10 @@ if __name__ == "__main__":
   #genPost(np.arange(0,20,0.01), noLetters, show=True, fn = "post" + no)
   #genRuns(lettersPerDayExp, iters, time, "runs" + no + "Exp" + term, autoNames=False)
   #genRuns(lettersPerDay, iters, time, "runs" + no + term)
-  genRuns(lettersPerDayPart10, iters, time, "runs" + no + "Part10" + term, alg="met")
-  genRuns(lettersPerDayPart10, iters, time, "runs" + no + "SlicePart10" + term, alg="sliceTD")
+  #genRuns(lettersPerDayPart10, iters, time, "runs" + no + "Part10" + term, alg="met")
+  #genRuns(lettersPerDayPart10, iters, time, "runs" + no + "SlicePart10" + term, alg="sliceTD")
   #genRuns(lettersPerDayPartU20, iters, time, "runs" + no + "PartU20" + term)
   cd = stocPy.getCurDir(__file__)
   #stocPy.calcKSTests(cd + "/post" + no , [cd + "/runs" + no + term, cd + "/runs" + no + "Part10" +term, cd + "/runs" +  no + "PartU20" + term], names = ["Depth0", "Depth10", "Depth_U20"], burnIn=100, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="simplePoisson" + no)
-  stocPy.calcKSSumms(cd + "/post" + no , [cd + "/runs" + no + term, cd + "/runs" + no + "Part10" + term, cd + "/runs" +  no + "SlicePart10" + term], names = ["Depth0", "Depth10", "SliceDepth10"], burnIn=100, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="simplePoisson" + no)
+  stocPy.calcKSSumms(cd + "/post" + no , [cd + "/runs" + no + term, cd + "/runs" + no + "Part10" + term, cd + "/runs" +  no + "SlicePart10" + term], names = ["Depth0", "Depth10", "SliceDepth10"], burnIn=0, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="simplePoisson" + no)
   #stocPy.calcKSSumms(cd + "/post" + no , [cd + "/runs" + no + term, cd + "/runs" + no + "Exp" + term, cd + "/runs" +  no + "PartU20" + term], names = ["AutoNames", "ExpNames", "Auto-U20"], burnIn=100, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="simplePoisson" + no)

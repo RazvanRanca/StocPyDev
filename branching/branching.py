@@ -102,7 +102,7 @@ def branchingRep():
     stocPy.poisson(l, cond=1)
 
 def branchingRepPart1U15():
-  r = stocPy.stocPrim("poisson", (4,), obs=True, part=stocPy.stocPrim("randint", (0,16)))
+  r = stocPy.stocPrim("poisson", (4,), obs=True, part=5)#stocPy.stocPrim("randint", (0,16)))
   if r > 4:
     l = 6
   else:
@@ -112,17 +112,17 @@ def branchingRepPart1U15():
     stocPy.poisson(l, cond=1)
 
 def branchingRepPart12U15():
-  r = stocPy.stocPrim("poisson", (4,), obs=True, part=stocPy.stocPrim("randint", (0,16)))
+  r = stocPy.stocPrim("poisson", (4,), obs=True, part=5)#stocPy.stocPrim("randint", (0,16)))
   if r > 4:
     l = 6
   else:
-    p2 = stocPy.stocPrim("poisson", (4,), part=stocPy.stocPrim("randint", (0,16)))
+    p2 = stocPy.stocPrim("poisson", (4,), part=5)#stocPy.stocPrim("randint", (0,16)))
     l = fib(3*r) + p2
   for i in range(100):
     stocPy.poisson(l, cond=1)
 
 def branching():
-  r = stocPy.poisson(4, obs=True)
+  r = stocPy.stocPrim("poisson",(4,), obs=True, part=pDepth)
   if r > 4:
     l = 6
   else:
@@ -149,11 +149,11 @@ def branchingPart2U15():
   stocPy.poisson(l, cond=6)
 
 def branchingPart12U15():
-  r = stocPy.stocPrim("poisson", (4,), obs=True)#stocPy.stocPrim("randint", (0,16)))
+  r = stocPy.stocPrim("poisson", (4,), obs=True, part = stocPy.stocPrim("randint", (0,16)))
   if r > 4:
     l = 6
   else:
-    p2 = stocPy.stocPrim("poisson", (4,))#stocPy.stocPrim("randint", (0,16)))
+    p2 = stocPy.stocPrim("poisson", (4,), part = stocPy.stocPrim("randint", (0,16)))
     l = fib(3*r) + p2 
   stocPy.poisson(l, cond=6)
 
@@ -201,7 +201,7 @@ def genRuns(model, fn, noRuns = 100, length = 20000, agg=False, time=None, alg="
   runs = []
   for i in range(100):
     print "Run", i
-    runs.append(stocPy.getSamples(branching, length, discAll=True, alg="met")['branching-19-0'])
+    runs.append(stocPy.getSamples(branching, length, alg="met")['branching-19-0'])
 
   with open("metRunsNoTrans",'w') as f:
     cPickle.dump(runs, f)
@@ -210,12 +210,12 @@ def genRuns(model, fn, noRuns = 100, length = 20000, agg=False, time=None, alg="
   for i in range(noRuns):
     print "Run", i
     if not agg:
-      samples = stocPyFunc(model, length, alg=alg, thresh=thresh, discAll=True)
+      samples = stocPyFunc(model, length, alg=alg, thresh=thresh)
       #print samples.keys()
       assert(len(samples.keys()) == 1)
       runs.append(samples[samples.keys()[0]])
     else:
-      runs.append(stocPy.aggDecomp(stocPyFunc(model, length, discAll=True, alg=alg), func=aggFunc))
+      runs.append(stocPy.aggDecomp(stocPyFunc(model, length, alg=alg), func=aggFunc))
   with open(stocPy.getCurDir(__file__) + "/"  + fn,'w') as f:
     cPickle.dump(runs, f)
 
@@ -259,7 +259,7 @@ def transLLtoSamp(run, lim=float("inf")):
   return nrun
 
 def displayExperiments(xlim=300000):
-  paths = ["branchingP12_5_Slice_Timed1", "branchingTimed1", "branchingSliceTimed1"]
+  paths = ["branchingP12_None_Slice_Timed1x", "branchingTimed1", "branchingSliceTimed1"]
   titles = ["SlicePart5", "Met", "SliceTD"]
 
   runs = []
@@ -284,14 +284,16 @@ def stackTest():
 
 if __name__ == "__main__":
   global pDepth
-  pDepth = 5
+  pDepth = None 
+  #stocPy.getSamples(branching, 100, alg="met")
+  #assert(False)
   #with open(stocPy.getCurDir(__file__) + "/branchingRepP12U15Timed05", 'r') as f:
   #	  print cPickle.load(f)
   #genRuns(branching, "branchingTimed05", time=30, noRuns=20)
+  #genRuns(branching, "branchingSliceTimed1", time=10, noRuns=5, alg="sliceTD")
   #genRuns(branchingPart1U15, "branchingP1_5Timed05", time=30, noRuns=20)
   #genRuns(branchingPart2U15, "branchingP2_5Timed05", time=30, noRuns=20)
-  
-  genRuns(branchingPart12U15, "branchingP12_" + str(pDepth) + "_Slice_Timed1", time=60, noRuns=20, alg="sliceTD")
+  genRuns(branchingPart12U15, "branchingP12_" + str(pDepth) + "_Slice_Timed1x", time=10, noRuns=5, alg="sliceTD")
   """
   for pDepth in range(10):
     print "Depth:", pDepth
@@ -310,16 +312,16 @@ if __name__ == "__main__":
   #with open(cd + "/branchingTimed1",'r') as f:
   #  print map(len, cPickle.load(f))
   #procRuns()
-  #stocPy.plotSamples(stocPy.getSamples(branching, 1000, discAll=True))#, 'branching-23-0')
-  #samples = stocPy.extractDict(stocPy.getTimedSamples(branching, 60, discAll=True, alg="met"))
+  #stocPy.plotSamples(stocPy.getSamples(branching, 1000))#, 'branching-23-0')
+  #samples = stocPy.extractDict(stocPy.getTimedSamples(branching, 60, alg="met"))
   #print samples
   #print stocPy.calcKLTest(post, samples)#, ["gigi"])
   #genRuns(branching, "branchingSliceOldTimed1", noRuns = 20, time=60, alg="slice")
   #genRuns(branching, "branchingSliceTimed1", noRuns = 20, time=60, alg="sliceTD")
   #assert(False)
-  #stocPy.plotSamples(stocPy.getSamplesByLL(branching, 10000, discAll=True, alg="slice"))
+  #stocPy.plotSamples(stocPy.getSamplesByLL(branching, 10000, alg="slice"))
 
-  #print sorted(stocPy.getSamplesByLL(branching, 30, discAll=True, alg="sliceNoTrans")['branching-19-0'].items())
+  #print sorted(stocPy.getSamplesByLL(branching, 30, alg="sliceNoTrans")['branching-19-0'].items())
   #with open("branching/sliceMet01Runs",'r') as f:
   #  runs2 = cPickle.load(f)
 
@@ -329,7 +331,7 @@ if __name__ == "__main__":
   #print sorted(runs2[5].items())
   #stocPy.calcKLTest(post, runs2[5])
 
-  #samps = [stocPy.getSamplesByLL(branching, 10000, discAll=True, alg="sliceStat")['branching-19-0'] for i in range(100)]
+  #samps = [stocPy.getSamplesByLL(branching, 10000, alg="sliceStat")['branching-19-0'] for i in range(100)]
   #print samps.count(0), samps.count(1)
   #testBranchingSliceNoTrans(samps)
   #procRuns()

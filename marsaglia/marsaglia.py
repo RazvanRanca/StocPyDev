@@ -68,6 +68,11 @@ def genRuns(model, noRuns, time, fn, alg="met", autoNames=True):
     cPickle.dump(runs, f)
 
 if __name__ == "__main__":
+  global pind 
+  pind = None 
+  #print stocPy.getSamples(marsagliaMean, 1000, alg="sliceTD")
+  #print obsMean
+  #assert(False)
   #getPost(-20, 35, 0.001, show=False, fn="marsagliaPost")
   #stocPy.plotCumPost(getPost(3, 11, 0.01, show=False))
   #getPost(3, 11, 0.01, show=True)
@@ -75,8 +80,8 @@ if __name__ == "__main__":
   cd = stocPy.getCurDir(__file__) + "/"
   global pind 
   pind = None
-  noRuns = 10
-  time = 60
+  noRuns = 5
+  time = 6
   term = "_" + str(noRuns) + "_" + str(time)
   genRuns(marsagliaMean, noRuns=noRuns, time=time, fn="MetRuns" + term, alg="met")
   genRuns(marsagliaMean, noRuns=noRuns, time=time, fn="SliceRuns" + term, alg="sliceTD")
@@ -89,5 +94,5 @@ if __name__ == "__main__":
   #print procSamples(obsMean, traceAcc)
   #stocPy.plotSamples(stocPy.procUserSamples(obsMean, traceAcc))
   #stocPy.plotSamples(stocPy.getSamples(marsagliaMean, 10, alg="met"))
-  stocPy.calcKSTests(cd + "marsagliaPost" , [cd + "MetRuns" + term, cd + "SliceRuns" + term, cd + "Part" + str(pind) + "Runs" + term, cd + "SlicePart" + str(pind) + "Runs" + term], names = ["Met", "Slice", "Part" + str(pind), "SlicePart" + str(pind)], burnIn=0, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="Marsaglia")
+  #stocPy.calcKSTests(cd + "marsagliaPost" , [cd + "MetRuns" + term, cd + "SliceRuns" + term, cd + "Part" + str(pind) + "Runs" + term, cd + "SlicePart" + str(pind) + "Runs" + term], names = ["Met", "Slice", "Part" + str(pind), "SlicePart" + str(pind)], burnIn=0, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="Marsaglia")
   stocPy.calcKSSumms(cd + "marsagliaPost" , [cd + "MetRuns" + term, cd + "SliceRuns" + term, cd + "Part" + str(pind) + "Runs" + term, cd + "SlicePart" + str(pind) + "Runs" + term], names = ["Met", "Slice", "Part" + str(pind), "SlicePart" + str(pind)], burnIn=0, aggFreq=np.logspace(1,math.log(1000000,10),10), modelName="Marsaglia")

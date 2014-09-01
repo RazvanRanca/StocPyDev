@@ -515,7 +515,6 @@ def genRuns(model, alg, noRuns = 100, length = 20000, thresh=0.1, fn=None, agg=N
         assert(len(samples.keys()) == 1)
         runs.append(samples[samples.keys()[0]])
 
-
   if not fn:
     fn = "normal/normal"+str(no)+"PerLL" + alg.capitalize()
     if alg == "sliceMet":
@@ -562,7 +561,7 @@ def runKsRuns(mi, term = "MetRuns", paths = None, titles = None):
     titles = ["Metropolis", "Metropolis Dec5", "Metropolis Dec10", "Metropolis Dec15"]
   paths = [expDir + path for path in paths]
 
-  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(1000000,10),10), burnIn=0, names=titles, modelName = "NormalMean" + mi, postXlim=[0,10000])
+  stocPy.calcKSSumms(expDir + "normal" + mi + "Post", paths, aggFreq=np.logspace(1,math.log(1000000,10),10), burnIn=0, names=titles, modelName = "NormalMean" + mi, postXlim=[float("-inf"), float("inf")])
 
 def movementFromMode((priorMean, priorStd), (postMean, postStd), curSamp, iters):
   move = []
@@ -687,9 +686,9 @@ def verifyMovementExpDepth(priorStd, postStd, maxDepth, iters, title=""): # test
       em = np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/(2.0**d)), (0, postStd), 0, iters)])
       print d, "/", depth, "-", em
       diffs[-1] += em
-      dp = (priorStd/postStd) / (2.0**d)
+      dp = (priorStd/postStd)**2 / (2.0**d)
       rDiffs[-1] += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1) 
-    dp = (priorStd/postStd) / 2.0**depth
+    dp = (priorStd/postStd)**2 / 2.0**depth
     rDiffs[-1] += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1)
     rDiffs[-1] /= (depth + 1.0)
     diffs[-1] += np.mean([(abs(x[0])/postStd)*x[1] for x in movementFromMode((0, priorStd/(2.0**depth)), (0, postStd), 0, iters)])
@@ -716,9 +715,9 @@ def getMixExpMovement(d, depths, weights = None):
 def getExpMovement(d, depth):
   em = 0
   for p in range(1, depth + 1):
-    dp = d / (2.0**p)
+    dp = d**2 / (2.0**p)
     em += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1) 
-  dp = d / 2.0**depth
+  dp = d**2 / 2.0**depth
   em += (math.sqrt(2.0/math.pi) * dp) / (dp**2.0 + 1)
   em /= (depth + 1.0)
   return em
@@ -760,7 +759,7 @@ def getOptimalDepth(d, dump=False): # get Optimal depth for d, verify against te
   sumVal = 0
   valPrev = 0
   while True:
-    valCur = 2.0**depth / (d**2.0 + 2**(2.0 * depth))
+    valCur = 2.0**depth / (d**4.0 + 2**(2.0 * depth))
     if sumVal == 0:
       sumVal += valCur
       depth +=1
@@ -796,14 +795,14 @@ def approxOptimalDepth(ds):
   rDepths1 = []
   rDepths2 = []
   for fr in frs:
-    rDepths1.append(math.log(fr,2))
+    rDepths1.append(math.log(fr**2,2))
     rDepths2.append(math.ceil(rDepths1[-1]))
 
   plt.plot(ds, depths, 'bD')
   plt.plot(frs, rDepths2, 'g', linewidth=2)
   plt.plot(frs, rDepths1, 'r', linewidth=2)
   plt.xscale("log")
-  plt.xlabel("PriorStd / PostStd")
+  plt.xlabel("PriorVar / PostVar")
   plt.ylabel("Depth")
   plt.title("Optimal depths given d against log(d) and ceil(log(d))")
   plt.show()
@@ -838,15 +837,15 @@ def testOptExpImprovement(ds):
   plt.show()
   
 if __name__ == "__main__":
+  approxOptimalDepth(np.logspace(0,9,100))
+  assert(False)
   global normalData
   normalData = loadData(stocPy.getCurDir(__file__) + "/normalData_2_001_1000")
-  #genRuns(normal8, alg="met", noRuns = 10, time=60, fn="normal8MetTimed") 
-  #genRuns(normal8, alg="met", noRuns = 10, time=60, fn="normal8MetTimed") 
-
+  #genRuns(normal8, alg="sliceTD", noRuns = 5, time=10, fn="normal8SliceTimedSmall") 
   #genRuns(normal4, alg="met", noRuns = 10, time=6, fn="normal4MetTimed1Small") 
   #genRuns(normal4, alg="slice", noRuns = 10, time=6, fn="normal4SliceTimed1Small") 
   #genRuns(normal4, alg="sliceTD", noRuns = 10, time=6, fn="normal4SliceTDTimed1Small") 
-  runKsRuns(8, paths=["normal8MetRuns", "normal8SliceTimed", "normal8Dec5MetRuns", "normal8Dec15MetRuns"], titles=["Met", "Slice", "Met_Part5", "Met_Part15"])
+  runKsRuns(8, paths=["normal8SliceTimedSmall", "normal8MetRuns","normal8Dec5MetRuns", "normal8Dec15MetRuns"], titles=["Slice", "Met", "Met_Part5", "Met_Part15"])
   assert(False)
   #getPost(9, -15, 15, 0.001, fn="normal9Post")
   #samples = stocPy.aggDecomp(stocPy.getTimedSamples(normal9Dec5, 10, alg="met", thresh=0.1), func= lambda xs: 10000 * ss.norm.cdf(sum(xs)))

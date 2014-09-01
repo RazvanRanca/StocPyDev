@@ -13,6 +13,80 @@ import ast
 import os
 import sys
 
+class CRP: #anglican crp formulation: http://www.robots.ox.ac.uk/~fwood/anglican/examples/dp_mixture_model/index.html
+  def __init__(self, a = None):
+    self.n = 0
+    self.pns = []
+    if a != None:
+      self.a = float(a)
+  
+  def __call__(self, x):
+    return self.getClass(x)
+
+  def getClass(self, x):
+    while self.n <= x:
+      self.getNext()
+    for c in range(len(self.pns)):
+      if x in self.pns[c]:
+        return c
+    assert(False)
+
+  def getNext(self):
+    r = random.random()
+    accum = 0
+    for c in range(len(self.pns)):
+      accum += len(self.pns[c]) / (self.n + self.a)
+      if r < accum:
+        return self.setClass(c)
+    return self.setClass()
+
+  def setClass(self, c=None):
+    if c != None:
+      self.pns[c].append(self.n)
+    else:
+      c = len(self.pns)
+      self.pns.append([self.n])
+    self.n += 1
+    return c
+
+  def reset(self):
+    self.pns = []
+    self.n = 0
+
+  def rvs(self, a = None, maxElems = None):
+    if a == None:
+      a = self.a
+    newCrp = CRP(a)
+    if maxElems == None:
+      return newCrp
+    else:
+      newCrp.getClass(maxElems - 1)
+      return newCrp.pns
+
+  def getParams(self, part = None, a = None):
+    if a == None:
+      a = self.a
+    if part == None:
+      return a, self.n, self.pns
+    elif isinstance(part, CRP):
+      return a, sum(map(len, part.pns)), map(len, part.pns)
+    else:
+      return a, sum(map(len, part)), map(len, part)
+
+  def pmf(self, part = None, a = None, maxElem = None):
+    a, n, pns = self.getParams(part, a)
+    prob = (math.gamma(a) * a**(len(pns))) / math.gamma(a + n)
+    for pn in pns:
+      prob *= math.gamma(pn)
+    return prob
+
+  def logpmf(self, part = None, a = None, maxElem = None):
+    a, n, pns = self.getParams(part, a)
+    lprob = math.lgamma(a) + len(pns)*math.log(a) - math.lgamma(a + n)
+    for pn in pns:
+      lprob += math.lgamma(pn)
+    return lprob
+
 class Categorical():
   def __init__(self):
     self.func = lambda ps : ss.rv_discrete(name="categorical", values=(range(len(ps)), ps))
@@ -32,8 +106,8 @@ ll = 0
 llFresh = 0
 llStale = 0
 db = {}
-erps = {"unifCont":0, "studentT":1, "poisson":2, "normal":3, "invGamma":4, "beta":5, "Categorical":6}
-dists = [ss.uniform, ss.t, ss.poisson, ss.norm, ss.invgamma, ss.beta, Categorical()]
+erps = {"unifCont":0, "studentT":1, "poisson":2, "normal":3, "invGamma":4, "beta":5, "categorical":6, "crp":7}
+dists = [ss.uniform, ss.t, ss.poisson, ss.norm, ss.invgamma, ss.beta, Categorical(), CRP()]
 discrete_dists = [Categorical, ss.rv_discrete]
 observ = set()
 condition = set()
@@ -43,6 +117,9 @@ partFunc = {}
 nameOrder = {} 
 seenNames = set()
 traceAcc = []
+metAccProbs = {} 
+recAccNames = set()
+autoDepth = 1
 
 def unifCont(start, end, cond = None, obs=False, name = None): #different name than ss.uniform because parametrixation si diff: [start, end]
   initERP(name, obs)
@@ -70,34 +147,72 @@ def beta(a, b, cond = None, obs=False, name = None):
 
 def categorical(ps, cond = None, obs=False, name = None):
   initERP(name, obs)
-  return getERP(name, cond, erps["Categorical"], (ps,))
+  return getERP(name, cond, erps["categorical"], (ps,))
+
+def crp(a, maxElem = None, cond = None, obs=False, name = None):
+  initERP(name, obs)
+  return getERP(name, cond, erps["crp"], (a, maxElem))
 
 def stocPrim(distName, params, cond=None, obs=False, part=None, name=None):
   if part != None:
     global partName
     global partFunc
+    global recAccNames 
+    global metAccProbs
+    global autoDepth
+
+    depth = part
+    if part == "auto":
+      #print metAccProbs
+      try:
+        name = metAccProbs.keys()[0]
+        accs = metAccProbs[name]
+      except:
+        accs = []
+      if len(accs) > 10:
+        mAcc = np.mean(accs[-10:])
+        if mAcc < 0.75:
+          autoDepth += 1
+          metAccProbs[name] = []
+          recAccNames = set()
+          print mAcc, autoDepth
+        else:
+          if len(accs) > 50 and np.mean(accs[-50:]) > 0.8:
+            print autoDepth, np.mean(accs[-10:]), np.mean(accs[-50:]) 
+            assert(False)
+        if len(accs) % 10 == 0:
+          print len(accs), autoDepth, mAcc
+      depth = autoDepth
 
     if not name in seenNames:
       seenNames.add(name)
       nameOrder[name] = len(nameOrder)
 
-    depth = part
     ns = []
     for i in range(1, depth+1):
       #print i
       pName = name + "-" + str(i)
       ns.append(normal(0, math.sqrt(1.0/(2.0**i)), obs=obs, name = pName))
       partName[pName] = name
+      recAccNames.add(pName)
+
     pName = name + "-" + str(depth) + "-r"
+    recAccNames.add(pName)
     ns.append(normal(0, math.sqrt(1.0/(2.0**depth)), obs=obs, name = pName))
     partName[pName] = name
     try:
       dist = getattr(ss, distName)
     except:
-      dist = getattr(sys.modules[__name__], distName)()
+      dist = dists[erps[distName]]
 
-    if any(map(lambda x: isinstance(dist, x), discrete_dists)):
-      func = lambda xs: int(dist.ppf(ss.norm.cdf(sum(xs)), *params))
+    if isDiscrete(dist):
+      def func(xs):
+        r = dist.ppf(ss.norm.cdf(sum(xs)), *params)
+        try:
+          r = int(r)
+        except:
+          pass
+        return r
     else:
       func = lambda xs: dist.ppf(ss.norm.cdf(sum(xs)), *params)
     partFunc[name] = func 
@@ -110,6 +225,9 @@ def stocPrim(distName, params, cond=None, obs=False, part=None, name=None):
     ret = getERP(name, cond, erps[distName], params)
     #print name, ret
     return ret
+
+def isDiscrete(dist):
+  return any(map(lambda x: isinstance(dist, x), discrete_dists))
 
 def initERP(name, obs):
   assert(name)
@@ -176,6 +294,10 @@ def resetAll():
   global nameOrder
   global seenNames
   global traceAcc
+  global dists
+  global metAccProbs
+  global recAccNames
+  global autoDepth
 
   startTime = time.time()
   curNames = set()
@@ -190,6 +312,10 @@ def resetAll():
   nameOrder = {}
   seenNames = set()
   traceAcc = []
+  dists[erps["crp"]].reset()
+  metAccProbs = {} 
+  recAccNames = set()
+  autoDepth = 1
 
 """
 Insert 3 stacks as globals, for functions, loopCount and lineNo-colNo pairs.
@@ -411,20 +537,20 @@ def initModel(model):
     resetAll()
     model()
 
-def getSamples(model, noSamps, discAll=False, alg="met", thresh=0.1, autoNames = True, orderNames = False, outTraceAcc = False):
+def getSamples(model, noSamps, alg="met", thresh=0.1, autoNames = True, orderNames = False, outTraceAcc = False):
   if autoNames:
     model = procRawModel(model)
   initModel(model)
   if alg == "met":
-    sampleDict = dict([(n+1, metropolisSampleTrace(model, no = n+1, discAll = discAll)) for n in range(noSamps)])
+    sampleDict = dict([(n+1, metropolisSampleTrace(model, no = n+1)) for n in range(noSamps)])
   elif alg == "slice":
-    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1, discAll = discAll)) for n in range(noSamps)])
+    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1)) for n in range(noSamps)])
   elif alg == "sliceTD":
-    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1, discAll = discAll, tdCorr=True)) for n in range(noSamps)])
+    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1, tdCorr=True)) for n in range(noSamps)])
   elif alg == "sliceNoTrans":
-    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1, discAll = discAll, allowTransJumps = False)) for n in range(noSamps)])
+    sampleDict = dict([(n+1, sliceSampleTrace(model, no = n+1, allowTransJumps = False)) for n in range(noSamps)])
   elif alg == "sliceMet":
-    sampleDict = dict([(n+1, sliceMetMixSampleTrace(model, no = n+1, discAll = discAll)) for n in range(noSamps)])
+    sampleDict = dict([(n+1, sliceMetMixSampleTrace(model, no = n+1)) for n in range(noSamps)])
   else:
     raise Exception("Unknown inference algorithm: " + str(alg))
 
@@ -438,7 +564,7 @@ def getSamples(model, noSamps, discAll=False, alg="met", thresh=0.1, autoNames =
   """
   return aggSamples(sampleDict, orderNames, outTraceAcc)
 
-def getSamplesByLL(model, noLLs, discAll=False, alg="met", thresh=0.1, autoNames = True, orderNames = False, outTraceAcc = False):
+def getSamplesByLL(model, noLLs, alg="met", thresh=0.1, autoNames = True, orderNames = False, outTraceAcc = False):
   if autoNames:
     model = procRawModel(model)
 
@@ -447,31 +573,31 @@ def getSamplesByLL(model, noLLs, discAll=False, alg="met", thresh=0.1, autoNames
   sampleDict = {}
   if alg == "met":
     while totLLs < noLLs:
-      samp = metropolisSampleTrace(model, no = totLLs, discAll = discAll)
+      samp = metropolisSampleTrace(model, no = totLLs)
       totLLs += 1
       if totLLs < noLLs:
         sampleDict[totLLs] = samp
   elif alg == "slice":
     while totLLs < noLLs:
-      llCount, samp = sliceSampleTrace(model, no = totLLs, discAll = discAll, countLLs = True)
+      llCount, samp = sliceSampleTrace(model, no = totLLs, countLLs = True)
       totLLs += llCount
       if totLLs < noLLs:
         sampleDict[totLLs] = samp
   elif alg == "sliceTD":
     while totLLs < noLLs:
-      llCount, samp = sliceSampleTrace(model, no = totLLs, discAll = discAll, countLLs = True, tdCorr=True)
+      llCount, samp = sliceSampleTrace(model, no = totLLs, countLLs = True, tdCorr=True)
       totLLs += llCount
       if totLLs < noLLs:
         sampleDict[totLLs] = samp
   elif alg == "sliceNoTrans":
     while totLLs < noLLs:
-      llCount, samp = sliceSampleTrace(model, no = totLLs, discAll = discAll, allowTransJumps = False, countLLs = True)
+      llCount, samp = sliceSampleTrace(model, no = totLLs, allowTransJumps = False, countLLs = True)
       totLLs += llCount
       if totLLs < noLLs:
         sampleDict[totLLs] = samp
   elif alg == "sliceMet":
     while totLLs < noLLs:
-      llCount, samp = sliceMetMixSampleTrace(model, no = totLLs, discAll = discAll, countLLs = True, thresh = thresh)
+      llCount, samp = sliceMetMixSampleTrace(model, no = totLLs, countLLs = True, thresh = thresh)
       totLLs += llCount
       if totLLs < noLLs:
         sampleDict[totLLs] = samp
@@ -481,7 +607,7 @@ def getSamplesByLL(model, noLLs, discAll=False, alg="met", thresh=0.1, autoNames
   print "rejectedTransJumps", rejTransJumps
   return aggSamples(sampleDict, orderNames, outTraceAcc)
 
-def getTimedSamples(model, maxTime, discAll = False, alg = "met", thresh = 0.1, autoNames=True, orderNames = False, outTraceAcc = False):
+def getTimedSamples(model, maxTime, alg = "met", thresh = 0.1, autoNames=True, orderNames = False, outTraceAcc = False):
   if autoNames:
     model = procRawModel(model)
 
@@ -490,15 +616,15 @@ def getTimedSamples(model, maxTime, discAll = False, alg = "met", thresh = 0.1, 
   while time.time() - startTime < maxTime:
     index = len(sampleDict)+1
     if alg == "met":
-      sampleDict[index] = metropolisSampleTrace(model, no = index, discAll = discAll)
+      sampleDict[index] = metropolisSampleTrace(model, no = index)
     elif alg == "slice":
-      sampleDict[index] = sliceSampleTrace(model, no = index, discAll = discAll)
+      sampleDict[index] = sliceSampleTrace(model, no = index)
     elif alg == "sliceTD":
-      sampleDict[index] = sliceSampleTrace(model, no = index, discAll = discAll, tdCorr=True)
+      sampleDict[index] = sliceSampleTrace(model, no = index, tdCorr=True)
     elif alg == "sliceNoTrans":
-      sampleDict[index] = sliceSampleTrace(model, no = index, discAll = discAll, allowTransJumps = False)
+      sampleDict[index] = sliceSampleTrace(model, no = index, allowTransJumps = False)
     elif alg == "sliceMet":
-      sampleDict[index] = sliceMetMixSampleTrace(model, no = index, discAll = discAll)
+      sampleDict[index] = sliceMetMixSampleTrace(model, no = index)
     else:
       raise Exception("Unknown inference algorithm: " + str(alg))
 
@@ -539,23 +665,24 @@ def aggSamples(samples, orderNames = False, outTraceAcc = False):
   resetAll()
   return aggSamps
 
-def sliceMetMixSampleTrace(model, no = None, discAll = False, thresh = 0.1, countLLs = False):
+def sliceMetMixSampleTrace(model, no = None, thresh = 0.1, countLLs = False):
   if random.random() > thresh:
-    return sliceSampleTrace(model, no = no, discAll = discAll, allowTransJumps = False, countLLs = countLLs)
+    return sliceSampleTrace(model, no = no, allowTransJumps = False, countLLs = countLLs)
   else:
-    samp = metropolisSampleTrace(model, no = no, discAll = discAll)
+    samp = metropolisSampleTrace(model, no = no)
     if countLLs:
       return 1, samp
     else:
       return samp
 
 tries = {}
-def metropolisSampleTrace(model, no = None, discAll = False):
+def metropolisSampleTrace(model, no = None):
   global db
   global ll
   global tries
   global observ
   global traceAcc
+  global metAccProbs
 
   unCond = list(set(db.keys()).difference(condition))
   n = random.choice(unCond)
@@ -590,6 +717,12 @@ def metropolisSampleTrace(model, no = None, discAll = False):
   #print "before", db
   changed = True
   acc = ll - oll + ol - l + math.log(len(unCond)) - math.log(len(set(db.keys()).difference(condition))) + llStale - llFresh
+  if n in recAccNames:
+    try:
+      metAccProbs[partName[n]].append(math.e**(min(0,acc)))
+    except:
+      metAccProbs[partName[n]] = [math.e**(min(0,acc))]
+
   if math.log(random.random()) < acc:
     traceAcc.append(1)
   else:
@@ -611,7 +744,7 @@ def metropolisSampleTrace(model, no = None, discAll = False):
   return sample
 
 rejTransJumps = 0
-def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJumps = True, countLLs = False, tdCorr=False):
+def sliceSampleTrace(model, width = 10, no = None, allowTransJumps = True, countLLs = False, tdCorr=False):
   global db
   global ll
   global rejTransJumps
@@ -621,6 +754,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
   unCond = list(set(db.keys()).difference(condition))
   n = random.choice(unCond)
   otp, ox, ol, ops = db[n]
+  disc = isDiscrete(dists[otp])
   
   u = -1*ss.expon.rvs(-1*ll) #sample log(x), x~unif(0,likelihood)
   r = random.random()
@@ -635,7 +769,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
   llc = ll
   while llc > u:
     xl -= curWidth
-    if discAll:
+    if disc:
       xl = int(math.floor(xl))
 
     odb = copy.copy(db)
@@ -643,7 +777,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
     db = odb
     curWidth *= 2
     if allowTransJumps and tdCorr:
-      llc = ll + llStale - llFresh
+      llc = ll + math.log(len(unCond)) - math.log(len(set(db.keys()).difference(condition)))+ llStale - llFresh
     else:
       llc = ll
     debugPrint(False, "l", xl, ll)
@@ -653,7 +787,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
   llc = ll
   while llc > u:
     xr += curWidth
-    if discAll:
+    if disc:
       xr = int(math.ceil(xr))
 
     odb = copy.copy(db)
@@ -661,7 +795,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
     db = odb
     curWidth *= 2
     if allowTransJumps and tdCorr:
-      llc = ll + llStale - llFresh
+      llc = ll + math.log(len(unCond)) - math.log(len(set(db.keys()).difference(condition)))+ llStale - llFresh
     else:
       llc = ll
     debugPrint(False, "r", xr, ll)
@@ -675,7 +809,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
     #print first, llc, u, transJump, allowTransJumps,
     if first:
       first = False
-    if discAll:
+    if disc:
       x = random.randrange(xl,xr+1)
     else:
       x = random.uniform(xl, xr)
@@ -687,7 +821,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
       llc = ll + math.log(len(unCond)) - math.log(len(set(db.keys()).difference(condition))) + llStale - llFresh
     else:
       llc = ll
-    #print ll, llc, llStale , llFresh
+    #print xl, xr, x, u, ll, llc, llStale , llFresh
     #u = -1*ss.expon.rvs(-1*(oll - llStale))# +math.log(len(db)) - math.log(len(odb))))
     debugPrint(False, "c", xl, xr, x, ll)
     if llc < u or math.isnan(llc) or (transJump and (not allowTransJumps)):
@@ -713,7 +847,7 @@ def sliceSampleTrace(model, width = 10, no = None, discAll=False, allowTransJump
   else:
     return sample
 
-def sliceMultSampleTrace(model, width = 100, no = None, discAll=False):
+def sliceMultSampleTrace(model, width = 100, no = None):
   global db
   global ll
 
@@ -728,7 +862,8 @@ def sliceMultSampleTrace(model, width = 100, no = None, discAll=False):
 
     r = random.random()
     oll = ll 
-    _, ox, _, _ = db[n]
+    otp, ox, _, _ = db[n]
+    disc = isDiscrete(dists[otp])
     oxs[n] = ox
     xl = ox
     xr = ox
@@ -737,7 +872,7 @@ def sliceMultSampleTrace(model, width = 100, no = None, discAll=False):
     assert(ll > u)
     while ll > u:
       xl -= curWidth
-      if discAll:
+      if disc:
         xl = int(math.floor(xl))
 
       odb = copy.copy(db)
@@ -750,7 +885,7 @@ def sliceMultSampleTrace(model, width = 100, no = None, discAll=False):
     curWidth = r*width
     while ll > u:
       xr += curWidth
-      if discAll:
+      if disc:
         xr = int(math.ceil(xr))
 
       odb = copy.copy(db)
@@ -768,7 +903,7 @@ def sliceMultSampleTrace(model, width = 100, no = None, discAll=False):
     if first:
       first = False
     xs = {}
-    if discAll:
+    if disc:
       for n in unCond:
         xs[n] = random.randrange(xl,xr+1)
     else:
@@ -984,7 +1119,7 @@ def plotCumSampDists(fns):
     plotCumSampDist(fn, show=False)
   plt.show()
 
-def calcKSTest(pfn, fns, names = None, postXlim=None):
+def calcKSTest(pfn, fns, names = None, postXlim=[float("-inf"), float("inf")]):
   post = plotCumPost(pfn, plot=False, xlim=postXlim)
   diffs = {}
   ps = []
@@ -1029,7 +1164,6 @@ def calcKSRun(postFun, run, aggFreq, burnIn):
   curAgg = 0
   if isinstance(run, list):
     run = dict([(i+1, run[i]) for i in range(len(run))])
-  print burnIn, len(run)
   for k, samp in sorted(run.items()):
     if k < burnIn:
       continue
@@ -1051,7 +1185,7 @@ def calcKSRun(postFun, run, aggFreq, burnIn):
   ys.append(calcKSDiff(postFun, samps))
   return xs, ys
 
-def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=None, alpha=0.25, single=False, modelName=None, postXlim=None):
+def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=None, alpha=0.25, single=False, modelName=None, postXlim=[float("-inf"), float("inf")]):
   postFun = interpolate.interp1d(*plotCumPost(pfn, plot=False, zipRez=False, xlim=postXlim))
   ps = []
   ns = []
@@ -1087,7 +1221,7 @@ def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=N
     plt.title("Performance on " + modelName + " Model", size=30)
     plt.show()
 
-def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, postXlim=None, ylim = None):
+def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, postXlim=[float("-inf"), float("inf")], ylim = None):
   postFun = interpolate.interp1d(*plotCumPost(pfn, plot=False, zipRez=False, xlim=postXlim))
   ps = []
   ns = []
@@ -1103,6 +1237,7 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
     end = float("inf")
     with open(fn, 'r') as f:
       runs = cPickle.load(f)
+      print map(len, runs)
     for r in range(len(runs)):
       print fn, r 
       xs, ys = calcKSRun(postFun, runs[r], aggFreq, burnIn)
@@ -1114,13 +1249,13 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
         end = xs[-1]
       fs.append(interp1d(xs,ys))
 
-    end += 1
-
     top = []
     med = []
     bot = []
-
-    for x in np.arange(start, end):
+    count = 1000#(end-start)/float(num)
+    axis = np.logspace(math.log(start+0.001, 10), math.log(end-0.001, 10), count)
+    for x in axis:
+      #print x
       if x % 1000 == 0:
         print "x", x
       vals = []
@@ -1131,13 +1266,13 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
       med.append(np.percentile(vals, 50))
       bot.append(np.percentile(vals, 75))
 
-    plt.plot(range(start, end), med, cols[i], linewidth=2, alpha=0.9)
-    plt.plot(range(start, end), top, cols[i] + "--", linewidth=2, alpha=0.9)
-    plt.plot(range(start, end), bot, cols[i] + "--", linewidth=2, alpha=0.9)
+    plt.plot(axis, med, cols[i], linewidth=2, alpha=0.9)
+    plt.plot(axis, top, cols[i] + "--", linewidth=2, alpha=0.9)
+    plt.plot(axis, bot, cols[i] + "--", linewidth=2, alpha=0.9)
 
   if not names:
     names = ns
-  plt.legend(ps,names,loc=1)
+  plt.legend(ps,names,loc=3)
   plt.xscale("log")
   plt.yscale("log", basey=2)
   plt.xlim([0, xlim])
@@ -1199,9 +1334,10 @@ def calcKLTests(post, sampsLists, names, freq = float("inf"), burnIn = 0, xlim=f
   post = potRead(post)
   axs = []
   for i in range(len(sampsLists)):  
+    print "Run", i 
     ax, = plt.plot([0],[0], cols[i])
     axs.append(ax)
-    for samps in sampsLists[i]:
+    for samps in getRuns(sampsLists[i]):
       calcKLTest(post, samps, freq, show=False, col=cols[i], burnIn = burnIn, xlim = xlim, aggSums=aggSums)
 
   plt.ylabel("KL divergence from posterior", size=20)
@@ -1251,15 +1387,15 @@ def calcKLTest(post, samps, freq = float("inf"), show=True, col=None, plot=True,
     sampList = []
     for c, samp in sorted(samps.items()):
       if c > xlim:
-	break
+        break
       if samp > cutOff or c < burnIn:
-	continue
+        continue
       c = c - burnIn
       sampList.append(samp)
       try:
-	sampDic[samp] += 1
+        sampDic[samp] += 1
       except:
-	sampDic[samp] = 1.0
+        sampDic[samp] = 1.0
 
       kl = getKLDiv(post, norm(sampDic))
       xs.append(c)
@@ -1294,11 +1430,17 @@ def getKLDiv(post, samp):
       kl += p * math.log(p / post[val])
   return kl
 
+def getRuns(runs):
+  if isinstance(runs, basestring):
+    with open(runs, 'r') as f:
+      runs = cPickle.load(f)
+  return runs
+
 def calcKLSumms(post, sampsLists, names, burnIn = 0, xlim = float("inf"), aggSums=False, xlabel="Trace likelihood calculations", title = "Performance on Branching model"):
   post = potRead(post)
   axs = []
   for i in range(len(sampsLists)):
-    axs.append(calcKLSumm(post, sampsLists[i], col=cols[i], show=False, burnIn = burnIn, xlim = xlim, aggSums=aggSums))
+    axs.append(calcKLSumm(post, getRuns(sampsLists[i]), col=cols[i], show=False, burnIn = burnIn, xlim = xlim, aggSums=aggSums))
 
   plt.ylabel("KL divergence from posterior", size=20)
   plt.xlabel(xlabel, size=20)
@@ -1313,8 +1455,7 @@ def calcKLSumm(post, sampsList, col = 'b', show=True, burnIn = 0, xlim = float("
   end = float("inf")
   num = float("-inf")
   for samps in sampsList:
-    if len(fs) % 10 == 0:
-      print "fs", len(fs)
+    print "fs", len(fs), len(samps)
     xs,ys = calcKLTest(post, samps, plot=False, burnIn = burnIn, xlim = xlim, aggSums=aggSums) #xs should be already sorted
     if len(xs) == 0:
       continue
@@ -1326,12 +1467,12 @@ def calcKLSumm(post, sampsList, col = 'b', show=True, burnIn = 0, xlim = float("
       num = len(xs)
     fs.append(interp1d(xs,ys))
 
-  inc = (end-start)/float(num)
+  count = 1000#(end-start)/float(num)
   top = []
   med = []
   bot = []
-  print start, end
-  for x in np.arange(start, end, inc):
+  axis = np.logspace(math.log(start+0.001, 10), math.log(end-0.001, 10), count)
+  for x in axis:
     if x % 1000 == 0:
       print "x", x
     vals = []
@@ -1344,9 +1485,9 @@ def calcKLSumm(post, sampsList, col = 'b', show=True, burnIn = 0, xlim = float("
 
   plt.yscale("log", basey=2)
   plt.xscale("log")
-  ax, = plt.plot(np.arange(start, end, inc), med, col)
-  plt.plot(np.arange(start, end, inc), top, col + "--")
-  plt.plot(np.arange(start, end, inc), bot, col + "--") 
+  ax, = plt.plot(axis, med, col)
+  plt.plot(axis, top, col + "--")
+  plt.plot(axis, bot, col + "--") 
   
   if show:
     plt.show()
@@ -1417,7 +1558,7 @@ def aggDecomp(decSamps, func=lambda xs: sum(xs)):
   return dict([(k,func(v)) for (k,v) in samples.items()])
 
 def getCurDir(f):
-  return os.path.dirname(os.path.realpath(f))
+  return os.path.dirname(os.path.realpath(f)) + "/"
 
 def extractDict(dic, name = None):
   if not name:
@@ -1426,7 +1567,7 @@ def extractDict(dic, name = None):
   return dic[name]
 
 def procUserSamples(samples, accs):
-  print len(samples), len(accs)
+  #print len(samples), len(accs)
   corrSamples = {}
   prevSamp = samples[-len(accs)-1]
   samples = samples[-len(accs):]

@@ -178,10 +178,10 @@ def categorical(ps): #scipy.stats has no categorical. Should implement this in S
 
 def hmm():
   states = []
-  states.append(stocPy.stocPrim("Categorical", (sProbs,), obs=True, part=pind))
+  states.append(stocPy.stocPrim("categorical", (sProbs,), obs=True, part=pind))
   for i in range(1,17):
     #print states
-    states.append(stocPy.stocPrim("Categorical", (tProbs[states[i-1]],), obs=True, part=pind))
+    states.append(stocPy.stocPrim("categorical", (tProbs[states[i-1]],), obs=True, part=pind))
     stocPy.normal(eMeans[states[i]], 1, cond=obs[i-1])
 
 def hmmSpec():
@@ -280,17 +280,17 @@ if __name__ == "__main__":
   global sind
   global pind
   sind = 5 
-  pind = 5 
-  #genRuns(hmm, noRuns=10, runTime=60, fn="hmmRunPart5_10_60", alg="met", discAll = True, autoNames=True)
+  pind = None
+  #genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunMet_10_600", alg="met", discAll = True, autoNames=True)
   #showRuns("hmmRunMet_2_test_"+str(sind), proc=True)
   #assert(False)
   #genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunSliceTD_10_600", alg="sliceTD", discAll=True, autoNames=True)
   pind = 1
-  #genRuns(hmm, noRuns=10, runTime=600, fn="hmmRunPart1_10_600", alg="met", autoNames=True)
+  genRuns(hmm, noRuns=5, runTime=10, fn="hmmRunPart1_5_10", alg="met", autoNames=True)
   posts = fwd_bkw(obs, sProbs, tProbs, eProbs)#[sind]
   #procRuns(posts, ["hmmRunMet_2_test_"+str(sind), "hmmRunSliceTD_2_test_"+str(sind)], ["Met", "SliceTD"], proc=False, aggSums=True)
-  procRuns(posts, ["hmmRunMet_10_600", "hmmRunSliceTD_10_600"], ["Met", "SliceTD"], proc=False, aggSums=True)
-  #procRuns(posts, ["hmmRunPart5_10_60"], ["Part5"], proc=False, aggSums=True)
+  #procRuns(posts, ["hmmRunMet_10_600", "hmmRunPart1_10_600", "hmmRunSliceTD_10_600"], ["Met", "Part5", "SliceTD"], proc=False, aggSums=True)
+  procRuns(posts, ["hmmRunPart1_5_10"], ["Part1"], proc=False, aggSums=True)
   #stocPy.getTimedSamples(hmm, 30, alg="met")
   #print '\n'.join(map(lambda x: str([(k,str(v/float(len(stateHist)))[:5]) for (k,v) in sorted(dict(Counter(x)).items())]), zip(*stateHist)))
   #v = make_church_prime_ripl()
