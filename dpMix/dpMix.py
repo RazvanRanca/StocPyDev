@@ -99,6 +99,47 @@ def getPost(ds, a, fn=None):
   post = stocPy.norm(post)
   return post
 
+obsLens = []
+def dpmLazy():
+  crp = stocPy.crp(1.72)
+  sds = {}
+  ms = {}
+  for i in range(len(obs)):
+    c = crp(i)
+    if c not in ms:
+      sds[c] = math.sqrt(10 * stocPy.stocPrim("invgamma", (1, 0, 10), part=4))
+      ms[c] = stocPy.stocPrim("normal", (0, sds[c]), part=4)
+    stocPy.normal(ms[c], sds[c], obs[i])
+  obsLens.append(len(ms))
+
+def dpmEager():
+  crp = stocPy.crp(1.72, 10)
+  sds = {}
+  ms = {}
+  cs = {}
+  for ps in range(len(crp)):
+    sds[ps] = math.sqrt(10 * stocPy.stocPrim("invgamma", (1, 0, 10), part=2))
+    ms[ps] = stocPy.stocPrim("normal", (0, sds[ps]), part=2)
+    for p in crp[ps]:
+     cs[p] = ps
+
+  for i in range(len(obs)):
+    stocPy.normal(ms[cs[i]], sds[cs[i]], obs[i])
+  obsLens.append(len(ms))
+
+def genRuns(model, noRuns, time, fn, alg="met"):
+  global obsLens
+  runs = []
+  for i in range(noRuns):
+    print str(model), "Run", i
+    samples, traceAcc = stocPy.getTimedSamples(model, time, alg=alg, outTraceAcc=True)
+    runs.append(stocPy.procUserSamples(obsLens, traceAcc))
+    obsLens = []
+  cd = stocPy.getCurDir(__file__)
+  print map(lambda run: (min(run.values()), max(run.values())), runs)
+  with open(cd + "/" + fn, 'w') as f:
+    cPickle.dump(runs, f)
+
 if __name__ == "__main__":
   #print allParts(range(3))
   #print powerSet(range(3))
@@ -106,4 +147,14 @@ if __name__ == "__main__":
   #storeLLs(obs, "llDict")
   #for n in range(1,11):
   #  print len(allParts(range(n)))
-  print getPost(obs, 1.72, "dpMixLLS")
+  #print getPost(obs, 1.72, "dpMixLLS")
+  #_, traceAcc = stocPy.getSamples(dpmLazy, 100, alg="met", outTraceAcc=True)
+  #print stocPy.procUserSamples(obsLens, traceAcc)
+  noRuns = 5
+  runTime = 60
+  term = "_" + str(noRuns) + "_" + str(runTime)
+
+  genRuns(dpmLazy, noRuns, runTime, "Lazy_Met" + term, alg="met")
+  genRuns(dpmEager, noRuns, runTime, "Eager_Met" + term, alg="met")
+  cd = stocPy.getCurDir(__file__)
+  stocPy.calcKLSumms(post , [cd + "Eager_Met" + term, cd + "Lazy_Met" + term], names = ["Eager", "Lazy"], burnIn=0, modelName="DP Mixture")

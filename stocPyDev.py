@@ -1091,7 +1091,7 @@ def plotCumPost(fn = "Posterior4", plot = True, show=True, zipRez=True, xlim=Non
     with open(fn,'r') as f:
       ds, ls = cPickle.load(f)
   else:
-    ds, ls = zip(*sorted(fn.items()))
+    ds, ls = map(list, zip(*sorted(fn.items())))
   cls = []
   curSum = 0
   for l in ls:
@@ -1221,7 +1221,7 @@ def calcKSTests(pfn, fns, aggFreq, burnIn = 0, plot=True, xlim = 200000, names=N
     plt.title("Performance on " + modelName + " Model", size=30)
     plt.show()
 
-def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, postXlim=[float("-inf"), float("inf")], ylim = None):
+def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelName=None, title=None, postXlim=[float("-inf"), float("inf")], ylim = None):
   postFun = interpolate.interp1d(*plotCumPost(pfn, plot=False, zipRez=False, xlim=postXlim))
   ps = []
   ns = []
@@ -1280,12 +1280,14 @@ def calcKSSumms(pfn, fns, aggFreq, burnIn = 0, xlim = 200000, names=None, modelN
     plt.ylim(ylim)
   plt.xlabel("Trace likelihood calculations", size=20)
   plt.ylabel("KS difference from posterior", size=20)
-  if not modelName:
-    no = fns[0].split("PerLL")[0][-1]
-    if no == "4":
-      no = "3"
-    modelName = "NormalMean" + no
-  plt.title("Performance on " + modelName + " Model", size=30)
+  if not title:
+    if not modelName:
+      no = fns[0].split("PerLL")[0][-1]
+      if no == "4":
+        no = "3"
+      modelName = "NormalMean" + no
+    title = "Performance on " + modelName + " Model"
+  plt.title(title, size=30)
 
   plt.show()
 
@@ -1436,7 +1438,7 @@ def getRuns(runs):
       runs = cPickle.load(f)
   return runs
 
-def calcKLSumms(post, sampsLists, names, burnIn = 0, xlim = float("inf"), aggSums=False, xlabel="Trace likelihood calculations", title = "Performance on Branching model"):
+def calcKLSumms(post, sampsLists, names, burnIn = 0, xlim = float("inf"), aggSums=False, xlabel="Trace likelihood calculations", modelName = None, title = None):
   post = potRead(post)
   axs = []
   for i in range(len(sampsLists)):
@@ -1444,6 +1446,13 @@ def calcKLSumms(post, sampsLists, names, burnIn = 0, xlim = float("inf"), aggSum
 
   plt.ylabel("KL divergence from posterior", size=20)
   plt.xlabel(xlabel, size=20)
+  if not title:
+    if not modelName:
+      no = fns[0].split("PerLL")[0][-1]
+      if no == "4":
+        no = "3"
+      modelName = "NormalMean" + no
+    title = "Performance on " + modelName + " Model"
   plt.title(title, size=30)
   plt.legend(axs, names, loc=3)
   plt.show()
